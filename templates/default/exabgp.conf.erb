@@ -1,0 +1,12 @@
+neighbor 204.11.135.33 {
+  description "Upstream Provider";
+  router-id 204.11.135.36;
+  local-address 204.11.135.36;
+  local-as 64591;
+  peer-as 53597;
+  hold-time 5;
+
+  static {
+    route 204.11.135.35/32 next-hop 204.11.135.36;
+  }
+}

@@ -23,11 +23,13 @@ template 'exabgp: default' do
   path '/etc/default/exabgp'
   source 'default.erb'
   mode '644'
+  notifies :restart, 'service[exabgp]'
 end
 
 template 'exabgp: config' do
-  path '/etc/exabgp/exabpg.conf'
-  source 'exabpg.conf.erb'
+  path '/etc/exabgp/exabgp.conf'
+  source 'exabgp.conf.erb'
+  notifies :reload, 'service[exabgp]'
 end
 
 service 'exabgp' do
