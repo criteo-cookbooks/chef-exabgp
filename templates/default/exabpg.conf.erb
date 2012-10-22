@@ -1,0 +1,90 @@
+##
+#
+# 9/27/2012
+# exabgp working-example for DNSimple
+# Hoyos Consulting LLC
+#
+#       aaaaa = AS Number assigned by ARIN (or private AS)
+#       bbbbb = AS Number of Upstream Transit
+#       x.x.x.x = Upstream Transit Router
+#       y.y.y.y = Local Interface (assigned by upstream provider)
+#       z.z.z.z = AnyCast /24 (either our own, or assigned by upstream provider)
+#
+#
+#
+
+#######
+#
+# /etc/network/interfaces
+# (assuming we'll use .1 and .2 on the /24, easy to scale out for differing services, etc)
+#
+#######
+
+auto lo
+iface lo inet loopback
+
+auto lo:0
+iface lo:0 inet static
+address z.z.z.1
+netmask 255.255.255.255
+
+auto lo:1
+iface lo:1 inet static
+address z.z.z.2
+netmask 255.255.255.255
+
+auto eth0
+iface eth0 inet static
+address y.y.y.y
+netmask 255.255.255.?
+gateway x.x.x.x
+
+#######
+#
+# /etc/sysctl.conf
+# (assuming that Upstream Provider assigns a /28 or /29 for the pair of lcoal POP machines to live in)
+# (fixes ARP issue on loopbacks)
+#
+#######
+
+net.ipv4.conf.eth0.arp_ignore = 1
+net.ipv4.conf.eth0.arp_announce = 2
+
+#######
+#
+# exabgp config
+#
+ /#######
+
+#v4 peer
+
+neighbor x.x.x.x {
+  description "Upstream Provider";
+  router-id y.y.y.y;
+  local-address y.y.y.y;
+  local-as aaaaa;
+  peer-as bbbbb;
+  hold-time 5;
+
+  process dnsimple-mon-1 {
+    run /opt/dnsimple/bpg/mon-1;
+  }
+
+  process dnsimple-mon-2 {
+    run /opt/dnsimple/bpg/mon-2;
+  }
+
+  static {
+    route z.z.z.1/32 next-hop y.y.y.y watchdog dnsimple-mon-1;
+    route z.z.z.2/32 next-hop y.y.y.y watchdog dnsimple-mon-2;
+  }
+}
+
+# v6 peer
+# (same as v4, just sub out local-address/neighbor, and routes being originated)
+
+#####
+#
+# example script to announce/withdrawl routes based on some watchdog
+#
+#####
