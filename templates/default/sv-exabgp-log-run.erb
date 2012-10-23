@@ -1,2 +1,2 @@
-#!/bin/bash
-exec nice --4 setuidgid nobody /usr/local/bin/exabgp /etc/exabgp/exabgp.conf | logger
+#!/bin/sh
+exec svlogd -tt ./main

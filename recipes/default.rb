@@ -18,6 +18,7 @@
 #
 
 include_recipe 'python'
+include_recipe 'runit'
 
 python_pip 'exabgp' do
   action :install
@@ -35,5 +36,6 @@ template 'exabgp: config' do
              :peer_as => node[:exabgp][:peer_as],
              :anycast_ip => node[:exabgp][:anycast_ip] )
   mode '644'
-  notifies :restart, 'runit_service[exabgp]'
 end
+
+runit_service 'exabgp'
