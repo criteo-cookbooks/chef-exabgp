@@ -17,7 +17,13 @@
 # limitations under the License.
 #
 
-package 'exabgp'
+include_recipe 'python'
+
+python_pip 'exabgp' do
+  action :install
+end
+
+directory '/etc/exabgp'
 
 template 'exabgp: default' do
   path '/etc/default/exabgp'
