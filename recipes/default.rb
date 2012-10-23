@@ -25,13 +25,6 @@ end
 
 directory '/etc/exabgp'
 
-template 'exabgp: default' do
-  path '/etc/default/exabgp'
-  source 'default.erb'
-  mode '644'
-  notifies :restart, 'service[exabgp]'
-end
-
 template 'exabgp: config' do
   path '/etc/exabgp/exabgp.conf'
   source 'exabgp.conf.erb'
@@ -41,10 +34,6 @@ template 'exabgp: config' do
              :local_as => node[:exabgp][:local_as],
              :peer_as => node[:exabgp][:peer_as],
              :anycast_ip => node[:exabgp][:anycast_ip] )
-  notifies :reload, 'service[exabgp]'
-end
-
-service 'exabgp' do
-  supports :status => true, :restart => true, :reload => true
-  action [ :enable, :start ]
+  mode '644'
+  notifies :restart, 'runit_service[exabgp]'
 end
