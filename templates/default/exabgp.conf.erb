@@ -1,12 +1,12 @@
-neighbor <%= @neighbor %> {
+neighbor <%= node[:exabgp][:neighbor] %> {
   description "Upstream Provider";
-  router-id <%= @router_id %>;
-  local-address <%= @ipaddress %>;
-  local-as <%= @local_as %>;
-  peer-as <%= @peer_as %>;
+  router-id <%= node[:exabgp][:router_id] %>;
+  local-address <%= node[:exabgp][:local_address] %>;
+  local-as <%= node[:exabgp][:local_as] %>;
+  peer-as <%= node[:exabgp][:peer_as] %>;
   hold-time 5;
 
   static {
-    route <%= @anycast_ip %>/32 next-hop <%= @ipaddress %>;
+    route <%= @anycast_ip %>/32 next-hop <%= node[:exabgp][:local_address] %>;
   }
 }

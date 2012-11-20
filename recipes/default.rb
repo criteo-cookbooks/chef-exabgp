@@ -32,17 +32,11 @@ rescue NoMethodError
   anycast_ip = '127.0.0.1'
 end
 
-
 template 'exabgp: config' do
   path '/etc/exabgp/exabgp.conf'
   source 'exabgp.conf.erb'
-  variables( :neighbor => node[:exabgp][:neighbor],
-             :router_id => node[:ipaddress],
-             :ipaddress => node[:ipaddress],
-             :local_as => node[:exabgp][:local_as],
-             :peer_as => node[:exabgp][:peer_as],
-             :anycast_ip => anycast_ip )
-  mode '644'
+  variables :anycast_ip => anycast_ip
+  mode 0644
 end
 
 runit_service 'exabgp'
