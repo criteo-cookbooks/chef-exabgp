@@ -26,7 +26,12 @@ end
 
 directory '/etc/exabgp'
 
-bag = data_bag_item('exabgp', 'anycast')
+begin
+  bag = data_bag_item('exabgp', 'anycast')
+rescue Net::HTTPServerException
+  Chef::Log.warn 'Failed to locate data bag for exabgp anycast configuration!'
+end
+
 if(bag)
   node.default[:exabgp][:anycast_ip] = bag[node.name]
 else
