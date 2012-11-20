@@ -26,16 +26,16 @@ end
 
 directory '/etc/exabgp'
 
-begin
-  anycast_ip = data_bag_item( 'exabgp', 'anycast' )[node.name]
-rescue NoMethodError
-  anycast_ip = '127.0.0.1'
+bag = data_bag_item('exabgp', 'anycast')
+if(bag)
+  node.default[:exabgp][:anycast_ip] = bag[node.name]
+else
+  node.default[:exabgp][:anycast_ip] = '127.0.0.1'
 end
 
 template 'exabgp: config' do
   path '/etc/exabgp/exabgp.conf'
   source 'exabgp.conf.erb'
-  variables :anycast_ip => anycast_ip
   mode 0644
 end
 

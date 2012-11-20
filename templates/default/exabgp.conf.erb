@@ -7,6 +7,6 @@ neighbor <%= node[:exabgp][:neighbor] %> {
   hold-time 5;
 
   static {
-    route <%= @anycast_ip %>/32 next-hop <%= node[:exabgp][:local_address] %>;
+    route <%= node[:exabgp][:anycast_ip] %>/32 next-hop <%= node[:exabgp][:local_address] %>;
   }
 }
