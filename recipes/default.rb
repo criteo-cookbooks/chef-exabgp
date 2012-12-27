@@ -32,7 +32,7 @@ template 'exabgp: config' do
              :local_address => node[:exabgp][:local_address],
              :local_as => node[:exabgp][:local_as],
              :peer_as => node[:exabgp][:peer_as],
-             :anycat_ip => node[:exabgp][:anycast_ip] )
+             :anycast_ip => node[:exabgp][:anycast_ip] )
   mode '644'
 end
 
