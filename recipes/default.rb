@@ -34,6 +34,7 @@ template 'exabgp: config' do
              :peer_as => node[:exabgp][:peer_as],
              :anycast_ip => node[:exabgp][:anycast_ip] )
   mode '644'
+  notifies :restart, 'service[exabgp]'
 end
 
 runit_service 'exabgp'
