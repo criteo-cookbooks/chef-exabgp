@@ -24,24 +24,16 @@ python_pip 'exabgp' do
   action :install
 end
 
-directory '/etc/exabgp'
-
-begin
-  bag = data_bag_item('exabgp', 'anycast')
-rescue Net::HTTPServerException
-  Chef::Log.warn 'Failed to locate data bag for exabgp anycast configuration!'
-end
-
-if(bag)
-  node.default[:exabgp][:anycast_ip] = bag[node.name]
-else
-  node.default[:exabgp][:anycast_ip] = '127.0.0.1'
-end
-
 template 'exabgp: config' do
   path '/etc/exabgp/exabgp.conf'
   source 'exabgp.conf.erb'
-  mode 0644
+  variables( :neighbor => node[:exabgp][:neighbor],
+             :router_id => node[:exabgp][:router_id],
+             :local_address => node[:exabgp][:local_address],
+             :local_as => node[:exabgp][:local_as],
+             :peer_as => node[:exabgp][:peer_as],
+             :anycat_ip => node[:exabgp][:anycast_ip] )
+  mode '644'
 end
 
 runit_service 'exabgp'
