@@ -24,6 +24,8 @@ python_pip 'exabgp' do
   action :install
 end
 
+directory '/etc/exabgp'
+
 template 'exabgp: config' do
   path '/etc/exabgp/exabgp.conf'
   source 'exabgp.conf.erb'
