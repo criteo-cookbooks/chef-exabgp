@@ -1,12 +1,33 @@
-neighbor <%= @neighbor %> {
-  description "Upstream Provider";
-  router-id <%= @router_id %>;
-  local-address <%= @local_address %>;
+neighbor <%= @neighbor_ipv4 %> {
+  description "Upstream IPv4 provider";
+  router-id <%= @router_id_ipv4 %>;
+  local-address <%= @local_address_ipv4 %>;
   local-as <%= @local_as %>;
   peer-as <%= @peer_as %>;
   hold-time 5;
 
   static {
-    route <%= @anycast_ip %>/24 next-hop <%= @local_address %>;
+    route <%= @anycast_ipv4 %>/24 {
+      next-hop <%= @local_address_ipv4 %>;
+      community <%= @local_as %>:<%= @community %>;
+    }
   }
 }
+
+<% if @neighbor_ipv6 %>
+neighbor <%= @neighbor_ipv6 %> {
+  description "Upstream IPv6 provider";
+  router-id <%= @router_id_ipv6 %>;
+  local-address <%= @local_address_ipv6 %>;
+  local-as <%= @local_as %>;
+  peer-as <%= @peer_as %>;
+  hold-time 5;
+
+  static {
+    route <%= @anycast_ipv6 %>/24 {
+      next-hop <%= @local_address_ipv6 %>;
+      community <%= @local_as %>:<%= @community %>;
+    }
+  }
+}
+<% end %>

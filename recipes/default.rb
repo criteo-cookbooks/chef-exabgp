@@ -29,12 +29,19 @@ directory '/etc/exabgp'
 template 'exabgp: config' do
   path '/etc/exabgp/exabgp.conf'
   source 'exabgp.conf.erb'
-  variables( :neighbor => node[:exabgp][:neighbor],
-             :router_id => node[:exabgp][:router_id],
-             :local_address => node[:exabgp][:local_address],
+  variables( :neighbor_ipv4 => node[:exabgp][:ipv4][:neighbor],
+             :router_id_ipv4 => node[:exabgp][:ipv4][:router_id],
+             :local_address_ipv4 => node[:exabgp][:ipv4][:local_address],
+             :anycast_ipv4 => node[:exabgp][:ipv4][:anycast],
+
+             :neighbor_ipv6 => node[:exabgp][:ipv6][:neighbor],
+             :router_id_ipv6 => node[:exabgp][:ipv6][:router_id],
+             :local_address_ipv6 => node[:exabgp][:ipv6][:local_address],
+             :anycast_ipv6 => node[:exabgp][:ipv6][:anycast],
+
              :local_as => node[:exabgp][:local_as],
              :peer_as => node[:exabgp][:peer_as],
-             :anycast_ip => node[:exabgp][:anycast_ip] )
+             :community => node[:exabgp][:community] )
   mode '644'
   notifies :restart, 'service[exabgp]'
 end
