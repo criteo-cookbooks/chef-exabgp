@@ -30,11 +30,11 @@ template 'exabgp: config' do
   path '/etc/exabgp/exabgp.conf'
   source 'exabgp.conf.erb'
   variables( :neighbor_ipv4 => node[:exabgp][:ipv4][:neighbor],
-             :local_address_ipv4 => node.ipaddress
+             :local_address_ipv4 => node.ipaddress,
              :route_ipv4 => node[:exabgp][:ipv4][:anycast].gsub(/\d+$/, '0'),
 
              :neighbor_ipv6 => node[:exabgp][:ipv6][:neighbor],
-             :local_address_ipv6 => node.ipaddress # need ipv6
+             :local_address_ipv6 => node.ipaddress, # need ipv6
              :route_ipv6 => node[:exabgp][:ipv6][:anycast].gsub(/\d+$/, '0'),
 
              :local_as => node[:exabgp][:local_as],
