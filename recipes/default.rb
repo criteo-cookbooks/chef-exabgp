@@ -34,8 +34,8 @@ template 'exabgp: config' do
              :route_ipv4 => node[:exabgp][:ipv4][:anycast].gsub(/\d+$/, '0'),
 
              :neighbor_ipv6 => node[:exabgp][:ipv6][:neighbor],
-             :local_address_ipv6 => node.ipaddress, # need ipv6
-             :route_ipv6 => node[:exabgp][:ipv6][:anycast].gsub(/\d+$/, '0'),
+             :local_address_ipv6 => node[:ipv6address],
+             :route_ipv6 => node[:exabgp][:ipv6][:anycast].gsub(/\d+$/, ''),
 
              :local_as => node[:exabgp][:local_as],
              :peer_as => node[:exabgp][:peer_as],
