@@ -24,7 +24,7 @@ neighbor <%= @neighbor_ipv6 %> {
   hold-time 5;
 
   static {
-    route <%= @route_ipv6 %>/24 {
+    route <%= @route_ipv6 %>/48 {
       next-hop <%= @local_address_ipv6 %>;
       community <%= @local_as %>:<%= @community %>;
     }
