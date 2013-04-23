@@ -5,6 +5,9 @@ neighbor <%= @neighbor_ipv4 %> {
   local-as <%= @local_as %>;
   peer-as <%= @peer_as %>;
   hold-time 5;
+  family {
+    inet4 unicast;
+  }
 
   static {
     route <%= @route_ipv4 %>/24 {
@@ -22,6 +25,9 @@ neighbor <%= @neighbor_ipv6 %> {
   local-as <%= @local_as %>;
   peer-as <%= @peer_as %>;
   hold-time 5;
+  family {
+    inet6 unicast;
+  }
 
   static {
     route <%= @route_ipv6 %>/48 {
