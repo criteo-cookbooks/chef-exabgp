@@ -29,7 +29,9 @@ directory '/etc/exabgp'
 template 'exabgp: config' do
   path '/etc/exabgp/exabgp.conf'
   source 'exabgp.conf.erb'
-  variables( :neighbor_ipv4 => node[:exabgp][:ipv4][:neighbor],
+  variables( :router_id => node.ipaddress,
+
+             :neighbor_ipv4 => node[:exabgp][:ipv4][:neighbor],
              :local_address_ipv4 => node.ipaddress,
              :route_ipv4 => node[:exabgp][:ipv4][:anycast].gsub(/\d+$/, '0'),
 

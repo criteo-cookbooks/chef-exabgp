@@ -1,6 +1,6 @@
 neighbor <%= @neighbor_ipv4 %> {
   description "Upstream IPv4 provider";
-  router-id <%= @local_address_ipv4 %>;
+  router-id <%= @router_id %>;
   local-address <%= @local_address_ipv4 %>;
   local-as <%= @local_as %>;
   peer-as <%= @peer_as %>;
@@ -20,7 +20,7 @@ neighbor <%= @neighbor_ipv4 %> {
 <% if @neighbor_ipv6 %>
 neighbor <%= @neighbor_ipv6 %> {
   description "Upstream IPv6 provider";
-  router-id <%= @local_address_ipv6 %>;
+  router-id <%= @router_id %>;
   local-address <%= @local_address_ipv6 %>;
   local-as <%= @local_as %>;
   peer-as <%= @peer_as %>;
