@@ -41,7 +41,7 @@ template 'exabgp: config' do
 
              :local_as => node[:exabgp][:local_as],
              :peer_as => node[:exabgp][:peer_as],
-             :community => node[:exabgp][:community] )
+             :community => node[:exabgp][:community].join(' '))
   mode '644'
   notifies :restart, 'service[exabgp]'
 end
