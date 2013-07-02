@@ -4,7 +4,7 @@ neighbor <%= @neighbor_ipv4 %> {
   local-address <%= @local_address_ipv4 %>;
   local-as <%= @local_as %>;
   peer-as <%= @peer_as %>;
-  hold-time 5;
+  hold-time <%= @hold_time %>;
   family {
     inet4 unicast;
   }
@@ -24,7 +24,7 @@ neighbor <%= @neighbor_ipv6 %> {
   local-address <%= @local_address_ipv6 %>;
   local-as <%= @local_as %>;
   peer-as <%= @peer_as %>;
-  hold-time 5;
+  hold-time <%= @hold_time %>;
   family {
     inet6 unicast;
   }

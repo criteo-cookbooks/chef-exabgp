@@ -29,19 +29,19 @@ directory '/etc/exabgp'
 template 'exabgp: config' do
   path '/etc/exabgp/exabgp.conf'
   source 'exabgp.conf.erb'
-  variables( :router_id => node.ipaddress,
+  variables( router_id: node.ipaddress,
+             hold_time: node[:exabgp][:hold_time],
+             neighbor_ipv4: node[:exabgp][:ipv4][:neighbor],
+             local_address_ipv4: node.ipaddress,
+             route_ipv4: node[:exabgp][:ipv4][:anycast].gsub(/\d+$/, '0'),
 
-             :neighbor_ipv4 => node[:exabgp][:ipv4][:neighbor],
-             :local_address_ipv4 => node.ipaddress,
-             :route_ipv4 => node[:exabgp][:ipv4][:anycast].gsub(/\d+$/, '0'),
+             neighbor_ipv6: node[:exabgp][:ipv6][:neighbor],
+             local_address_ipv6: node[:ipv6address],
+             route_ipv6: node[:exabgp][:ipv6][:anycast].gsub(/\d+$/, ''),
 
-             :neighbor_ipv6 => node[:exabgp][:ipv6][:neighbor],
-             :local_address_ipv6 => node[:ipv6address],
-             :route_ipv6 => node[:exabgp][:ipv6][:anycast].gsub(/\d+$/, ''),
-
-             :local_as => node[:exabgp][:local_as],
-             :peer_as => node[:exabgp][:peer_as],
-             :community => node[:exabgp][:community].join(' '))
+             local_as: node[:exabgp][:local_as],
+             peer_as: node[:exabgp][:peer_as],
+             community: node[:exabgp][:community].join(' '))
   mode '644'
   notifies :restart, 'service[exabgp]'
 end
