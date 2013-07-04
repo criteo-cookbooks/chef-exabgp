@@ -22,7 +22,7 @@ include_recipe 'runit'
 
 python_pip 'exabgp' do
   action :install
-end
+end unless node[:recipes].include? 'exabgp::source'
 
 directory '/etc/exabgp'
 
