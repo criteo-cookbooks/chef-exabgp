@@ -1,3 +1,3 @@
 #!/bin/sh
 exec 2>&1
-exec chpst -u nobody /usr/local/bin/exabgp /etc/exabgp/exabgp.conf
+exec chpst -u nobody <%= node[:exabgp][:bin_path] %> /etc/exabgp/exabgp.conf

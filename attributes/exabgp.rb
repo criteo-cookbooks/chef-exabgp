@@ -9,3 +9,6 @@ default[:exabgp][:ipv4][:anycast] = '127.0.0.1'
 
 default[:exabgp][:ipv6][:neighbor] = nil
 default[:exabgp][:ipv6][:anycast] = '::1'
+
+default[:exabgp][:source_version] = '3.1.13'
+default[:exabgp][:bin_path] = '/usr/local/bin/exabgp'
