@@ -26,6 +26,11 @@ end unless node[:recipes].include? 'exabgp::source'
 
 directory '/etc/exabgp'
 
+template '/etc/exabgp/route_0_watchdog.sh' do
+  source 'route_0_watchdog.sh.erb'
+  mode '755'
+end
+
 template 'exabgp: config' do
   path '/etc/exabgp/exabgp.conf'
   source 'exabgp.conf.erb'

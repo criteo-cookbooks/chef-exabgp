@@ -9,10 +9,15 @@ neighbor <%= @neighbor_ipv4 %> {
     inet4 unicast;
   }
 
+  process route_0 {
+    run /etc/exabgp/route_0_watchdog.sh;
+  }
+
   static {
     route <%= @route_ipv4 %>/24 {
       next-hop <%= @local_address_ipv4 %>;
       community [<%= @community %>];
+      watchdog route_0;
     }
   }
 }
