@@ -29,6 +29,7 @@ directory '/etc/exabgp'
 template '/etc/exabgp/route_0_watchdog.sh' do
   source 'route_0_watchdog.sh.erb'
   mode '755'
+  notifies :restart, 'service[exabgp]'
 end
 
 template 'exabgp: config' do
