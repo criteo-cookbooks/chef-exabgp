@@ -1,3 +1,4 @@
+name             'exabgp'
 maintainer       'DNSimple, Inc.'
 maintainer_email 'ops@dnsimple.com'
 license          'Apache 2.0'
