@@ -1,6 +1,7 @@
 ---
-driver:
-  name: vagrant
+driver_plugin: vagrant
+driver_config:
+  require_chef_omnibus: 11.16.4
 
 provisioner:
   name: chef_solo
