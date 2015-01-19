@@ -1,8 +1,10 @@
-# CHANGELOG for exabgp
+# 0.10.0 / 01-19-2015
 
-This file is used to list changes made in each version of exabgp.
+## Enhancements
 
-## 0.1.0:
+* Adding berkshelf integration
+
+# 0.9.0 / 07-11-2013
 
 * Initial release of exabgp
 
