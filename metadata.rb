@@ -6,8 +6,7 @@ description      'Installs/Configures exabgp'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          IO.read(File.join(File.dirname(__FILE__), 'VERSION')) rescue "0.0.1"
 
-supports 'ubuntu', '= 14.04'
-supports 'ubuntu', '= 13.04'
+supports 'ubuntu', '>= 12.04'
 
 depends 'python'
 depends 'runit'
