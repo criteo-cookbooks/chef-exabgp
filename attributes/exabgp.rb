@@ -1,5 +1,5 @@
-default[:exabgp][:local_as] = 0
-default[:exabgp][:peer_as] = 0
+default[:exabgp][:local_as] = 12345
+default[:exabgp][:peer_as] = 12345
 default[:exabgp][:community] = [0]
 
 default[:exabgp][:hold_time] = 20
