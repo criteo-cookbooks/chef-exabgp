@@ -10,4 +10,3 @@ supports 'ubuntu', '>= 12.04'
 
 depends 'python'
 depends 'runit'
-depends 'mercurial'
