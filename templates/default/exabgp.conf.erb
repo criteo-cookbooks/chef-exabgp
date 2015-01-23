@@ -6,7 +6,7 @@ neighbor <%= @neighbor_ipv4 %> {
   peer-as <%= @peer_as %>;
   hold-time <%= @hold_time %>;
   family {
-    inet4 unicast;
+    ipv4 unicast;
   }
 
   process route_0 {
