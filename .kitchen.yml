@@ -15,3 +15,7 @@ suites:
     run_list:
       - recipe[exabgp::default]
     attributes:
+  - name: source
+    run_list:
+      - recipe[exabgp::source]
+    attributes:
