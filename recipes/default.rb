@@ -52,4 +52,6 @@ template 'exabgp: config' do
   notifies :restart, 'service[exabgp]'
 end
 
-runit_service 'exabgp'
+runit_service 'exabgp' do
+  default_logger true
+end
