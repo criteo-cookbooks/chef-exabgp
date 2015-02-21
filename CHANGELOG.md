@@ -1,3 +1,10 @@
+# 1.0.2 / 2015-02-21
+
+## Enhancements
+
+* Added in a new attribute to allow for disabling the static route in the
+  exabgp config template
+
 # 1.0.1 / 2015-01-23
 
 ## Bug Fixes
