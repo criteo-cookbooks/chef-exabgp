@@ -9,6 +9,7 @@ neighbor <%= @neighbor_ipv4 %> {
     ipv4 unicast;
   }
 
+  <% if @enable_ipv4_static_route -%>
   process route_0 {
     run /etc/exabgp/route_0_watchdog.sh;
   }
@@ -20,6 +21,7 @@ neighbor <%= @neighbor_ipv4 %> {
       watchdog route_0;
     }
   }
+  <% end -%>
 }
 
 <% if @neighbor_ipv6 %>

@@ -40,6 +40,7 @@ template 'exabgp: config' do
              neighbor_ipv4: node[:exabgp][:ipv4][:neighbor],
              local_address_ipv4: node.ipaddress,
              route_ipv4: node[:exabgp][:ipv4][:anycast].gsub(/\d+$/, '0'),
+             enable_ipv4_static_route: node[:exabgp][:ipv4][:enable_static_route],
 
              neighbor_ipv6: node[:exabgp][:ipv6][:neighbor],
              local_address_ipv6: node[:ipv6address],
