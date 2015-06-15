@@ -7,6 +7,8 @@ Installs and configures [ExaBGP](https://github.com/Exa-Networks/exabgp), the sw
 * Ubuntu 12.04
 * Ubuntu 13.04
 * Ubuntu 14.04
+* CentOS 6
+* CentOS 7
 
 ## Dependencies
 
