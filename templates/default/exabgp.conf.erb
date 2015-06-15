@@ -15,7 +15,7 @@ neighbor <%= @neighbor_ipv4 %> {
   }
 
   static {
-    route <%= @route_ipv4 %>/24 {
+    route <%= @route_ipv4 %> {
       next-hop <%= @local_address_ipv4 %>;
       community [<%= @community %>];
       watchdog route_0;
@@ -37,7 +37,7 @@ neighbor <%= @neighbor_ipv6 %> {
   }
 
   static {
-    route <%= @route_ipv6 %>/48 {
+    route <%= @route_ipv6 %> {
       next-hop <%= @local_address_ipv6 %>;
       community [<%= @community %>];
     }
