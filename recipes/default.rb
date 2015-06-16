@@ -45,7 +45,7 @@ template 'exabgp: config' do
 
              neighbor_ipv6: node[:exabgp][:ipv6][:neighbor],
              local_address_ipv6: node[:ipv6address],
-             route_ipv6: node[:exabgp][:ipv6][:anycast].gsub(/\d+$/, ''),
+             route_ipv6: node[:exabgp][:ipv6][:anycast],
 
              local_as: node[:exabgp][:local_as],
              peer_as: node[:exabgp][:peer_as],
