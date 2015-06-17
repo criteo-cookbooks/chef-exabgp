@@ -39,6 +39,7 @@ template 'exabgp: config' do
              hold_time: node[:exabgp][:hold_time],
              neighbor_ipv4: node[:exabgp][:ipv4][:neighbor],
              local_address_ipv4: node.ipaddress,
+             local_preference: node[:exabgp][:local_preference],
              route_ipv4: node[:exabgp][:ipv4][:anycast].gsub(/\d+$/, '0'),
              enable_ipv4_static_route: node[:exabgp][:ipv4][:enable_static_route],
 
