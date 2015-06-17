@@ -1,3 +1,14 @@
+# 1.1.0 / 2015-06-17
+
+## Enhancements
+
+* Added local-preference attribute to not use ECMP. [PR#6][] [@ton31337][]
+* Merged prefix and route attributes into one. [PR#5][] [PR#7][] [@ton31337][]
+
+## Testing
+
+* Laid the groundwork down for an upcoming LWRP for the 2.x release
+
 # 1.0.2 / 2015-02-21
 
 ## Enhancements
@@ -35,3 +46,7 @@
 
 * Initial release of exabgp
 
+[PR#5]: https://github.com/aetrion/exabgp-cookbook/pull/5
+[PR#6]: https://github.com/aetrion/exabgp-cookbook/pull/6
+[PR#7]: https://github.com/aetrion/exabgp-cookbook/pull/7
+[@ton31337]: https://github.com/ton31337
