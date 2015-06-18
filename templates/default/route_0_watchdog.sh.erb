@@ -5,7 +5,7 @@ trap '' SIGINT
 while `true`;
 do
     sleep 5
-    if [ -f "<%= node[:exabgp][:watchdog_flag_file] %>" ]; then
+    if [ -f "<%= node['exabgp']['watchdog_flag_file'] %>" ]; then
         echo "announce watchdog route_0"
     else
         echo "withdraw watchdog route_0"
