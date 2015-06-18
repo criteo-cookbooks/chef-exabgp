@@ -1,3 +1,10 @@
+# 1.1.1 / 2015-06-17
+
+## Cleanup
+
+* Changed attribute access to strings instead of symbols. Resolves a
+  Foodcritic warning (FC001)
+
 # 1.1.0 / 2015-06-17
 
 ## Enhancements
