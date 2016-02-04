@@ -2,11 +2,15 @@ source 'https://rubygems.org'
 
 gem 'berkshelf'
 gem 'test-kitchen'
-gem 'kitchen-vagrant'
 gem 'thor-scmversion'
+gem 'chefspec'
+gem 'foodcritic'
+gem 'rubocop'
 
-group :test do
-  gem 'chefspec',   '~> 4.0'
-  gem 'foodcritic', '~> 4.0'
-  gem 'thor-foodcritic'
+group :integration do
+  gem 'kitchen-vagrant'
+end
+
+group :cloud do
+  gem 'kitchen-digitalocean'
 end
