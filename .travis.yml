@@ -1,26 +1,25 @@
 language: ruby
 sudo: required
 services: docker
-
 addons:
- apt:
-   sources:
-     - chef-stable-precise
-   packages:
-     - chefdk
-
+  apt:
+    sources:
+      - chef-stable-precise
+    packages:
+      - chefdk
 env:
   global:
-  - KITCHEN_ARGS="--destroy=never"
-  - KITCHEN_LOCAL_YAML=.kitchen.docker.yml
+    - KITCHEN_ARGS="--destroy=never"
+    - KITCHEN_LOCAL_YAML=.kitchen.docker.yml
   matrix:
-  - KITCHEN_REGEXP=default
+    - KITCHEN_REGEXP=default
 
 before_script:
   # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142230889
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
   - /opt/chefdk/embedded/bin/chef gem install kitchen-docker
+
 script:
   - /opt/chefdk/embedded/bin/chef --version
   - /opt/chefdk/embedded/bin/rubocop --version
@@ -29,3 +28,7 @@ script:
   - /opt/chefdk/embedded/bin/foodcritic . --exclude spec
   - /opt/chefdk/embedded/bin/rspec
   - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
+
+notifications:
+  slack:
+    secure: PTV/w6y8Rl7X0DYAt1p0Ez0FzT8y45HK785P0JYFpoOpjKM54682fDULuFL8LZGzXsyGt8A2btj+lVOo/HMWpFD7ho+K0+5tXolJ4f7GobNz+eKKrGRoOpGgfgKjDqzF44MEqa/W5kFBVLH7t6wW4OpwcaYAlGT4bgw3WONuAkI=
