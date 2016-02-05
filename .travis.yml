@@ -1,18 +1,22 @@
-language: ruby
 sudo: required
 services: docker
+
 addons:
   apt:
     sources:
       - chef-stable-precise
     packages:
       - chefdk
+
 env:
-  global:
-    - KITCHEN_ARGS="--destroy=never"
-    - KITCHEN_LOCAL_YAML=.kitchen.docker.yml
   matrix:
-    - KITCHEN_REGEXP=default
+    - INSTANCE=default-ubuntu-1404
+    - INSTANCE=default-ubuntu-1204
+    - INSTANCE=source-ubuntu-1404
+    - INSTANCE=source-ubuntu-1204
+
+# Don't `bundle install` because we're using ChefDK
+install: echo "skip bundle install"
 
 before_script:
   # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142230889
