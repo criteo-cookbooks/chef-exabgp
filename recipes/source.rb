@@ -1,7 +1,7 @@
 package 'git-core'
 
 git '/usr/src/exabgp' do
-  repository 'https://github.com/Exa-Networks/exabgp.git'
+  repository node['exabgp']['source_url']
   reference node['exabgp']['source_version']
   action :sync
 end

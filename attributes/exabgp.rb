@@ -12,6 +12,7 @@ default['exabgp']['ipv4']['enable_static_route'] = true
 default['exabgp']['ipv6']['neighbor'] = nil
 default['exabgp']['ipv6']['anycast'] = '::1/128'
 
+default['exabgp']['source_url'] = 'https://github.com/Exa-Networks/exabgp.git'
 default['exabgp']['source_version'] = 'master'
 default['exabgp']['bin_path'] = '/usr/local/bin/exabgp'
 
