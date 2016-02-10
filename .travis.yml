@@ -1,6 +1,7 @@
 sudo: required
 services: docker
 
+
 addons:
   apt:
     sources:
@@ -11,9 +12,9 @@ addons:
 env:
   matrix:
     - INSTANCE=default-ubuntu-1404
-    - INSTANCE=default-ubuntu-1204
-    - INSTANCE=source-ubuntu-1404
-    - INSTANCE=source-ubuntu-1204
+    # - INSTANCE=default-ubuntu-1204
+    # - INSTANCE=source-ubuntu-1404
+    # - INSTANCE=source-ubuntu-1204
 
 # Don't `bundle install` because we're using ChefDK
 install: echo "skip bundle install"
@@ -31,7 +32,7 @@ script:
   - /opt/chefdk/embedded/bin/foodcritic --version
   - /opt/chefdk/embedded/bin/foodcritic . --exclude spec
   - /opt/chefdk/embedded/bin/rspec
-  - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
+  # - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
 
 notifications:
   slack:
