@@ -17,6 +17,6 @@
 # limitations under the License.
 #
 
-exabgp_service 'default' do
-  action [:create, :start]
+exabgp 'package' do
+  install_type :package
 end
