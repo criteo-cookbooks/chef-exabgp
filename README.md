@@ -10,11 +10,10 @@ the swiss-army knife of networking.
 * Ubuntu 12.04
 * Ubuntu 14.04
 
-## Dependencies
+## Recommended Dependencies
 
-* python
-* runit (default for service setup)
-* git (default for source installation)
+* python (for package installation)
+* git (for source installation)
 
 ## Attributes
 
@@ -28,34 +27,27 @@ the swiss-army knife of networking.
 
 ## Recipes
 
-| Recipe | Description |
-| --- | --- |
-| `default` | Includes the `exabgp_config` and `exabgp_service` resources |
-| `package` | Installs ExaBGP via python packages |
-| `source`  | Installs ExaBGP via git from the project repository |
+* `exabgp::default` - Includes the `exabgp_config` and `exabgp_service` resources
 
 ## Resources
 
-### `exabgp_config`
+### `exabgp`
 
-The `exabgp_config` resource configures an exabgp instance.
+The `exabgp` resource installs and configures ExaBGP. It _does not_ create
+an ExaBGP service.
 
 ```ruby
-exabgp_config 'anycast' do
+exabgp 'anycast' do
   config_path '/etc/exabgp/exabgp.conf'
-end
-```
-
-### `exabgp_service`
-
-The `exabgp_service` resource controls the service configuration for a
-configured exabgp instance.
-
-```ruby
-exabgp_service 'anycast' do
   bin_path '/usr/local/bin/exabgp'
+  provider :package
 end
 ```
+
+#### Actions
+
+* `:create` – Install and configure ExaBGP. *(default)*
+* `:remove` – Remove ExaBGP and configuration file.
 
 ## License and Authors
 
