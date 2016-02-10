@@ -12,7 +12,7 @@ the swiss-army knife of networking.
 
 ## Recommended Dependencies
 
-* python (for package installation)
+* poise-python (for package installation)
 * git (for source installation)
 
 ## Attributes
@@ -40,13 +40,13 @@ an ExaBGP service.
 exabgp 'anycast' do
   config_path '/etc/exabgp/exabgp.conf'
   bin_path '/usr/local/bin/exabgp'
-  provider :package
+  install_type :package
 end
 ```
 
 #### Actions
 
-* `:create` – Install and configure ExaBGP. *(default)*
+* `:install` – Install and configure ExaBGP. *(default)*
 * `:remove` – Remove ExaBGP and configuration file.
 
 ## License and Authors
