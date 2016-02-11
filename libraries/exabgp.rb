@@ -10,6 +10,8 @@ module ExabgpCookbook
       python_package 'exabgp' do
         action :install
       end
+
+      directory "/etc/exabgp-#{name}"
     end
   end
 end
