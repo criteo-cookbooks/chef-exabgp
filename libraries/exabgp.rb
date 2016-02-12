@@ -1,5 +1,5 @@
 module ExabgpCookbook
-  class Exabgp < Chef::Resource
+  class Exabgp < ChefCompat::Resource
     resource_name :exabgp
 
     property :install_type, kind_of: Symbol, default: :package
