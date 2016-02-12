@@ -10,7 +10,7 @@ the swiss-army knife of networking.
 * Ubuntu 12.04
 * Ubuntu 14.04
 
-## Recommended Dependencies
+## Dependencies
 
 * poise-python (for package installation)
 * git (for source installation)
