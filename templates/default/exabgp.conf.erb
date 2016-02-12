@@ -1,52 +1,10 @@
-neighbor <%= @neighbor_ipv4 %> {
-  description "Upstream IPv4 provider";
-  router-id <%= @router_id %>;
-  local-address <%= @local_address_ipv4 %>;
-  local-as <%= @local_as %>;
-  peer-as <%= @peer_as %>;
-  hold-time <%= @hold_time %>;
+neighbor 127.0.0.1 {
+  router-id <%= node['ipaddress'] %>;
+  local-address <%= node['ipaddress'] %>;
+  local-as 12345;
+  peer-as 12345;
+  hold-time 20;
   family {
     ipv4 unicast;
   }
-
-  <% if @enable_ipv4_static_route -%>
-  process route_0 {
-    run /etc/exabgp/route_0_watchdog.sh;
-  }
-
-  static {
-    route <%= @route_ipv4 %> {
-      next-hop <%= @local_address_ipv4 %>;
-      <% if @local_preference %>
-      local-preference <%= @local_preference %>;
-      <% end %>
-      community [<%= @community %>];
-      watchdog route_0;
-    }
-  }
-  <% end -%>
 }
-
-<% if @neighbor_ipv6 %>
-neighbor <%= @neighbor_ipv6 %> {
-  description "Upstream IPv6 provider";
-  router-id <%= @router_id %>;
-  local-address <%= @local_address_ipv6 %>;
-  local-as <%= @local_as %>;
-  peer-as <%= @peer_as %>;
-  hold-time <%= @hold_time %>;
-  family {
-    inet6 unicast;
-  }
-
-  static {
-    route <%= @route_ipv6 %> {
-      next-hop <%= @local_address_ipv6 %>;
-      <% if @local_preference %>
-      local-preference <%= @local_preference %>;
-      <% end %>
-      community [<%= @community %>];
-    }
-  }
-}
-<% end %>
