@@ -10,5 +10,3 @@ supports 'ubuntu', '>= 12.04'
 
 depends 'compat_resource', '>= 12.5.11'
 depends 'poise-python'
-
-suggests 'runit'
