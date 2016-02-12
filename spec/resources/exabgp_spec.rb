@@ -16,4 +16,8 @@ describe 'exabgp' do
   it 'creates a configuration directory with the installation name attached' do
     expect(chef_run).to create_directory('/etc/exabgp-package')
   end
+
+  it 'creates a default template in the config directory' do
+    expect(chef_run).to create_template('/etc/exabgp-package/exabgp.conf')
+  end
 end
