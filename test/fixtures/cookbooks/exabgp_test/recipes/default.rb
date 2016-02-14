@@ -26,3 +26,12 @@ end
 exabgp 'instance' do
   instance 'anycast'
 end
+
+exabgp 'template' do
+  cookbook 'exabgp-test'
+end
+
+exabgp 'template-vars' do
+  cookbook 'exabgp-test'
+  variables({ description: 'A test' })
+end
