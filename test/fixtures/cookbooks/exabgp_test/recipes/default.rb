@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: exabgp_service_test
-# Recipe:: package
+# Recipe:: default
 #
-# Copyright 2012-2015, DNSimple, Inc.
+# Copyright 2012-2016, DNSimple, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +17,12 @@
 # limitations under the License.
 #
 
-exabgp 'package' do
-  install_type :package
+exabgp 'default'
+
+exabgp 'false_instance' do
+  instance false
+end
+
+exabgp 'instance' do
+  instance 'anycast'
 end
