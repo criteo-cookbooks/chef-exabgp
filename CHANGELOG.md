@@ -1,3 +1,17 @@
+# 2.0.0 / 2016-02-24
+
+## Breaking Changes
+
+* This cookbook is now Chef 12.1+ only compatible with a simplified resource
+  rewrite. There are some backward-compatible additions noted in the readme.
+  The default recipe now is only there for inclusion to let you use the exabgp
+  resource.
+
+## Testing
+
+* Added a better testing suite. Will add in better test kitchen coverage in the
+  near future.
+
 # 1.1.1 / 2015-06-17
 
 ## Cleanup
