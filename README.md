@@ -19,9 +19,8 @@ the swiss-army knife of networking.
 
 | Attribute | Description | Default Value |
 | --- | --- | --- |
-| `node['exabgp']['bin_path']` | Location of the ExaBGP binary | `/usr/local/bin/exabgp` |
+| `node['exabgp']['bin_path']` | Location of the ExaBGP binary, only set on source installations | `/usr/sec/exabgp/sbin/exabgp` |
 | `node['exabgp']['config_path']` | Location of the ExaBGP configuration file | `/etc/exabgp/exabgp.conf` |
-| `node['exabgp']['package_version']` | The version of the python package to install | `master` |
 | `node['exabgp']['source_url']` | URL to the git repository for source installtions | `https://github.com/Exa-Networks/exabgp.git` |
 | `node['exabgp']['source_version']` | git ref of the version to install | `master` |
 
@@ -34,20 +33,48 @@ the swiss-army knife of networking.
 ### `exabgp`
 
 The `exabgp` resource installs and configures ExaBGP. It _does not_ create
-an ExaBGP service.
-
-```ruby
-exabgp 'anycast' do
-  config_path '/etc/exabgp/exabgp.conf'
-  bin_path '/usr/local/bin/exabgp'
-  install_type :package
-end
-```
+an ExaBGP service. You will need to handle this separately via your service
+resource of choice.
 
 #### Actions
 
 * `:install` – Install and configure ExaBGP. *(default)*
 * `:remove` – Remove ExaBGP and configuration file.
+
+#### Parameters
+
+* `instance` – Name of the ExaBGP installation. If different than the name
+                parameter of the resource. If it is set to false, it will
+                not use the name parameter when naming the instance. This
+                is for backward compatibility with the older version of this
+                cookbook where you may be running an install from
+                `/etc/exabgp`.
+* `cookbook` – Which cookbook to look for the exabgp.conf.erb template
+* `variables` – Pass template variables in much like a template resource
+* `install_type` – Supports both :package and :source installations. Defaults
+                    to :package via python pip. If you'd like to support more
+                    installation options, send in a pull request. :heart:
+
+#### Examples
+
+```ruby
+# Installs into /etc/exabgp-anycast
+exabgp 'anycast'
+
+# Backward compatible with the previous exabgp cookbook
+# Installs to /etc/exabgp
+exabgp 'anycast' do
+  instance false
+end
+
+# Use your own template from templates/default/exabgp.conf.erb
+exabgp 'anycast' do
+  cookbook 'mycorp-exabgp'
+end
+
+# Setup a service
+service 'exabgp'
+```
 
 ## License and Authors
 
