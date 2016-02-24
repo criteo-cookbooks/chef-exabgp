@@ -8,5 +8,5 @@ version          IO.read(File.join(File.dirname(__FILE__), 'VERSION')) rescue '0
 
 supports 'ubuntu', '>= 12.04'
 
-depends 'python'
-depends 'runit'
+depends 'compat_resource', '>= 12.5.11'
+depends 'poise-python'

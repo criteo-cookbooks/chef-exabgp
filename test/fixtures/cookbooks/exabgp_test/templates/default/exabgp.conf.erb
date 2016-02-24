@@ -1,4 +1,7 @@
 neighbor 127.0.0.1 {
+  <% if @description -%>
+  description "<%= @description %>";
+  <% end -%>
   router-id <%= node['ipaddress'] %>;
   local-address <%= node['ipaddress'] %>;
   local-as 12345;
