@@ -20,7 +20,7 @@ the swiss-army knife of networking.
 | Attribute | Description | Default Value |
 | --- | --- | --- |
 | `node['exabgp']['bin_path']` | Location of the ExaBGP binary, only set on source installations | `/usr/sec/exabgp/sbin/exabgp` |
-| `node['exabgp']['config_path']` | Location of the ExaBGP configuration file | `/etc/exabgp/exabgp.conf` |
+| `node['exabgp']['config_path']` | Location of the ExaBGP configuration file, only set when a resource with instance set to false is configured | `/etc/exabgp/exabgp.conf` |
 | `node['exabgp']['source_url']` | URL to the git repository for source installtions | `https://github.com/Exa-Networks/exabgp.git` |
 | `node['exabgp']['source_version']` | git ref of the version to install | `master` |
 

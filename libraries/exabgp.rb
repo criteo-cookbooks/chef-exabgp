@@ -35,6 +35,10 @@ module ExabgpCookbook
         variables(new_resource.variables)
         mode 0644
       end
+
+      unless instance
+        node.default['exabgp']['config_path'] = "/etc/#{installation_name}/exabgp.conf"
+      end
     end
 
     protected
