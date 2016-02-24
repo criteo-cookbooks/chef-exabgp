@@ -8,10 +8,23 @@ module ExabgpCookbook
     property :variables, kind_of: Hash
 
     action :install do
-      include_recipe 'poise-python'
+      case install_type
+      when :package
+        include_recipe 'poise-python'
 
-      python_package 'exabgp' do
-        action :install
+        python_package 'exabgp' do
+          action :install
+        end
+      when :source
+        package 'git-core'
+
+        git '/usr/src/exabgp' do
+          repository node['exabgp']['source_url']
+          reference node['exabgp']['source_version']
+          action :sync
+        end
+
+        node.default['exabgp']['bin_path'] = '/usr/src/exabgp/sbin/exabgp'
       end
 
       directory "/etc/#{installation_name}"
