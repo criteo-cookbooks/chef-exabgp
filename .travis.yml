@@ -27,8 +27,7 @@ before_script:
 
 script:
   - chef --version
-  - rubocop --version
-  - rubocop
+  - cookstyle
   - foodcritic --version
   - foodcritic . --exclude spec
   - rspec
