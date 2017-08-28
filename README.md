@@ -1,13 +1,11 @@
 # exabgp cookbook
 
-Installs and configures [ExaBGP](https://github.com/Exa-Networks/exabgp)
-the swiss-army knife of networking.
+Installs and configures [ExaBGP](https://github.com/Exa-Networks/exabgp) the swiss-army knife of networking.
 
 ## Supported Chef and Platforms
 
-* Chef 12.1 and newer
+* Chef 12.6 and newer
 
-* Ubuntu 12.04
 * Ubuntu 14.04
 
 ## Dependencies
@@ -26,7 +24,7 @@ the swiss-army knife of networking.
 
 ## Recipes
 
-* `exabgp::default` - Includes the `exabgp_config` and `exabgp_service` resources
+* None, please use the resources by example below.
 
 ## Resources
 
@@ -41,7 +39,7 @@ resource of choice.
 * `:install` – Install and configure ExaBGP. *(default)*
 * `:remove` – Remove ExaBGP and configuration file.
 
-#### Parameters
+#### Properties
 
 * `instance` – Name of the ExaBGP installation. If different than the name
                 parameter of the resource. If it is set to false, it will

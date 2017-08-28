@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe 'exabgp' do
+describe 'exabgp_install' do
   cached(:chef_run) do
-    ChefSpec::SoloRunner.new(step_into: ['exabgp']).converge('exabgp_test::default')
+    ChefSpec::SoloRunner.new(step_into: ['exabgp_install']).converge('test::default')
   end
 
   context 'defaults' do
     it 'calls the exabgp resource with the name package' do
-      expect(chef_run).to install_exabgp('default')
+      expect(chef_run).to create_exabgp_install('default')
     end
 
     it 'installs the exabgp package through python pip' do
@@ -15,24 +15,6 @@ describe 'exabgp' do
     end
 
     it 'creates a configuration directory with the installation name attached' do
-      expect(chef_run).to create_directory('/etc/exabgp-default')
-    end
-
-    it 'creates a default template in the config directory' do
-      expect(chef_run).to create_template('/etc/exabgp-default/exabgp.conf')
-    end
-  end
-
-  context 'no instance name' do
-    it 'calls the exabgp resource with the name false_instance' do
-      expect(chef_run).to install_exabgp('false_instance')
-    end
-
-    it 'installs the exabgp package through python pip' do
-      expect(chef_run).to install_python_package('exabgp')
-    end
-
-    it 'creates a configuration directory without the installation name attached' do
       expect(chef_run).to create_directory('/etc/exabgp')
     end
 
@@ -42,8 +24,8 @@ describe 'exabgp' do
   end
 
   context 'custom instance name' do
-    it 'calls the exabgp resource with the name false_instance' do
-      expect(chef_run).to install_exabgp('instance')
+    it 'calls the exabgp resource with the name anycast_instance' do
+      expect(chef_run).to create_exabgp_install('anycast_instance')
     end
 
     it 'installs the exabgp package through python pip' do
@@ -61,7 +43,7 @@ describe 'exabgp' do
 
   context 'custom template' do
     it 'calls the exabgp resource with the name template' do
-      expect(chef_run).to install_exabgp('template')
+      expect(chef_run).to create_exabgp_install('template')
     end
 
     it 'installs the exabgp package through python pip' do
@@ -80,7 +62,7 @@ describe 'exabgp' do
 
   context 'custom template variables' do
     it 'calls the exabgp resource with the name template-vars' do
-      expect(chef_run).to install_exabgp('template-vars')
+      expect(chef_run).to create_exabgp_install('template-vars')
     end
 
     it 'installs the exabgp package through python pip' do
@@ -94,9 +76,9 @@ describe 'exabgp' do
     it 'creates a default template in the config directory' do
       expect(chef_run).to create_template('/etc/exabgp-template-vars/exabgp.conf')
         .with(
-        cookbook: 'exabgp-test',
-        variables: { description: 'A test' }
-      )
+          cookbook: 'exabgp-test',
+          variables: { description: 'A test' }
+        )
     end
   end
 end
