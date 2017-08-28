@@ -1,10 +1,10 @@
 module ExabgpCookbook
   module Helpers
-    def installation_name
-      if new_resource.instance_name.empty? || new_resource.instance_name == 'default'
+    def installation_name(instance_name)
+      if instance_name.empty? || instance_name == 'default'
         'exabgp'
       else
-        "exabgp-#{new_resource.instance_name}"
+        "exabgp-#{instance_name}"
       end
     end
   end

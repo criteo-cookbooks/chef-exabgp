@@ -3,9 +3,7 @@ property :install_type, kind_of: Symbol, equal_to: %i(package source), default: 
 property :cookbook, kind_of: String
 property :variables, kind_of: Hash
 
-action_class do
-  include ExabgpCookbook::Helpers
-end
+include ExabgpCookbook::Helpers
 
 action :create do
   case new_resource.install_type
@@ -27,14 +25,18 @@ action :create do
     node.default['exabgp']['bin_path'] = '/usr/src/exabgp/sbin/exabgp'
   end
 
-  directory "/etc/#{installation_name}"
+  directory "/etc/#{installation_name(new_resource.instance_name)}"
 
-  template "/etc/#{installation_name}/exabgp.conf" do
+  template "/etc/#{installation_name(new_resource.instance_name)}/exabgp.conf" do
     cookbook new_resource.cookbook
     source 'exabgp.conf.erb'
     variables(new_resource.variables)
-    mode 0644
+    mode '0644'
   end
 
-  node.default['exabgp']['config_path'] = "/etc/#{installation_name}/exabgp.conf"
+  node.default['exabgp']['config_path'] = "/etc/#{installation_name(new_resource.instance_name)}/exabgp.conf"
+
+  template "/etc/#{installation_name(new_resource.instance_name)}/exabgp.env" do
+    cookbook new_resource.cookbook
+  end
 end
