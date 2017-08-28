@@ -9,7 +9,7 @@ module ExabgpCookbook
     property :variables, kind_of: Hash
 
     action :install do
-      case install_type
+      case new_resource.install_type
       when :package
         include_recipe 'poise-python'
 
