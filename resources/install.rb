@@ -1,14 +1,14 @@
 property :instance_name, kind_of: String, name_property: true
-property :install_type, kind_of: Symbol, equal_to: [:package, :source], default: :package
+property :install_type, kind_of: Symbol, equal_to: %i[package source], default: :package
 property :cookbook, kind_of: String
 property :variables, kind_of: Hash
 
 action_class do
-  extend ExabgpCookbook::Helpers
+  include ExabgpCookbook::Helpers
 end
 
-action :install do
-  case install_type
+action :create do
+  case new_resource.install_type
   when :package
     include_recipe 'poise-python'
 
@@ -36,7 +36,5 @@ action :install do
     mode 0644
   end
 
-  unless instance
-    node.default['exabgp']['config_path'] = "/etc/#{installation_name}/exabgp.conf"
-  end
+  node.default['exabgp']['config_path'] = "/etc/#{installation_name}/exabgp.conf"
 end

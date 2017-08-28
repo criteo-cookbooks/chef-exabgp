@@ -17,21 +17,17 @@
 # limitations under the License.
 #
 
-exabgp 'default'
+exabgp_install 'default'
 
-exabgp 'false_instance' do
-  instance false
+exabgp_install 'anycast_instance' do
+  instance_name 'anycast'
 end
 
-exabgp 'instance' do
-  instance 'anycast'
-end
-
-exabgp 'template' do
+exabgp_install 'template' do
   cookbook 'exabgp-test'
 end
 
-exabgp 'template-vars' do
+exabgp_install 'template-vars' do
   cookbook 'exabgp-test'
-  variables({ description: 'A test' })
+  variables(description: 'A test')
 end
