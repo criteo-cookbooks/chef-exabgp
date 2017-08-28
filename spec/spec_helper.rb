@@ -1,4 +1,5 @@
 require 'chefspec'
 require 'chefspec/berkshelf'
 
-at_exit { ChefSpec::Coverage.report! }
+# Include our libraries
+Dir['libraries/*.rb'].each { |f| require File.expand_path(f) }
