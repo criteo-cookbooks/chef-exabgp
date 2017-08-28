@@ -1,5 +1,5 @@
 property :instance_name, kind_of: String, name_property: true
-property :install_type, kind_of: Symbol, equal_to: %i[package source], default: :package
+property :install_type, kind_of: Symbol, equal_to: %i(package source), default: :package
 property :cookbook, kind_of: String
 property :variables, kind_of: Hash
 
