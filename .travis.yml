@@ -12,9 +12,9 @@ env:
   global:
   - KITCHEN_LOCAL_YAML=.kitchen.dokken.yml
   matrix:
-  - KITCHEN_REGEXP=default-ubuntu-1404
+  - KITCHEN_REGEXP=package-ubuntu-1404
   - KITCHEN_REGEXP=source-ubuntu-1404
-  - KITCHEN_REGEXP=default-ubuntu-1604
+  - KITCHEN_REGEXP=package-ubuntu-1604
   - KITCHEN_REGEXP=source-ubuntu-1604
 
 matrix:
