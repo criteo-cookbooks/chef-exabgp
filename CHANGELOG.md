@@ -1,3 +1,10 @@
+# 2.1.0 / 2017-08-28
+
+## Enhancements
+
+* Added a `package_version` property to allow you to install a specific version
+  of the exabgp python package.
+
 # 2.0.1 / 2017-08-28
 
 ## Bug Fixes
