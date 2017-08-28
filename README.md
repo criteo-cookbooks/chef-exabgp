@@ -19,6 +19,7 @@ the swiss-army knife of networking.
 
 | Attribute | Description | Default Value |
 | --- | --- | --- |
+| `node['exabgp']['package_version']` | Version of the python package to install | `3.4.19` |
 | `node['exabgp']['bin_path']` | Location of the ExaBGP binary, only set on source installations | `/usr/sec/exabgp/sbin/exabgp` |
 | `node['exabgp']['config_path']` | Location of the ExaBGP configuration file, only set when a resource with instance set to false is configured | `/etc/exabgp/exabgp.conf` |
 | `node['exabgp']['source_url']` | URL to the git repository for source installtions | `https://github.com/Exa-Networks/exabgp.git` |
@@ -39,7 +40,6 @@ resource of choice.
 #### Actions
 
 * `:install` – Install and configure ExaBGP. *(default)*
-* `:remove` – Remove ExaBGP and configuration file.
 
 #### Parameters
 
@@ -49,6 +49,8 @@ resource of choice.
                 is for backward compatibility with the older version of this
                 cookbook where you may be running an install from
                 `/etc/exabgp`.
+* `package_version` – Which version of the python package to install, defaults
+                      to the `node['exabgp']['package_version'] attribute.
 * `cookbook` – Which cookbook to look for the exabgp.conf.erb template
 * `variables` – Pass template variables in much like a template resource
 * `install_type` – Supports both :package and :source installations. Defaults

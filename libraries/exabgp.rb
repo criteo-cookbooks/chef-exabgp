@@ -4,16 +4,18 @@ module ExabgpCookbook
 
     property :instance, kind_of: [String, FalseClass], name_property: true
     property :install_type, kind_of: Symbol, default: :package
+    property :package_version, kind_of: String, default: lazy { node['exabgp']['package_version'] }
     property :cookbook, kind_of: String
     property :variables, kind_of: Hash
 
     action :install do
-      case install_type
+      case new_resource.install_type
       when :package
         include_recipe 'poise-python'
 
         python_package 'exabgp' do
           action :install
+          version new_resource.package_version
         end
       when :source
         package 'git-core'
