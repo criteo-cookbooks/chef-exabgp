@@ -82,7 +82,7 @@ service 'exabgp'
 * Author:: [Jacobo Garcia](https://github.com/therobot)
 * Author:: [Joseph Caudle](https://github.com/jcaudle)
 
-Copyright:: 2013-2016 Aetrion, LLC
+Copyright:: 2013-2017 Aetrion, LLC dba DNSimple
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
