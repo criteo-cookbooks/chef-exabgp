@@ -1,3 +1,11 @@
+# 2.0.1 / 2017-08-28
+
+## Bug Fixes
+
+* Cleanup and begin the process of modernizing this cookbook. The next release
+  will bring this cookbook inline with our other open source cookbooks and
+  prepare it for ExaBGP 4.0.0 which has breaking changes as well.
+
 # 2.0.0 / 2016-02-24
 
 ## Breaking Changes
