@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'exabgp_install' do
   cached(:chef_run) do
-    ChefSpec::SoloRunner.new(step_into: ['exabgp_install']).converge('exabgp_test::default')
+    ChefSpec::SoloRunner.new(step_into: ['exabgp_install']).converge('test::default')
   end
 
   context 'defaults' do
