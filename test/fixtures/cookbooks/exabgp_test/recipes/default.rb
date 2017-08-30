@@ -33,5 +33,5 @@ end
 
 exabgp 'template-vars' do
   cookbook 'exabgp-test'
-  variables({ description: 'A test' })
+  variables(description: 'A test')
 end

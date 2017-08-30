@@ -94,9 +94,9 @@ describe 'exabgp' do
     it 'creates a default template in the config directory' do
       expect(chef_run).to create_template('/etc/exabgp-template-vars/exabgp.conf')
         .with(
-        cookbook: 'exabgp-test',
-        variables: { description: 'A test' }
-      )
+          cookbook: 'exabgp-test',
+          variables: { description: 'A test' }
+        )
     end
   end
 end
