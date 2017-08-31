@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe 'exabgp' do
+describe 'test::source' do
   cached(:chef_run) do
-    ChefSpec::SoloRunner.new(step_into: ['exabgp']).converge('exabgp_test::default')
+    ChefSpec::SoloRunner.new(step_into: ['exabgp']).converge('test::package')
   end
 
   context 'defaults' do
