@@ -5,10 +5,10 @@ the swiss-army knife of networking.
 
 ## Supported Chef and Platforms
 
-* Chef 12.1 and newer
+* Chef 12.6 and newer
 
-* Ubuntu 12.04
 * Ubuntu 14.04
+* Ubuntu 16.04
 
 ## Dependencies
 
@@ -27,7 +27,7 @@ the swiss-army knife of networking.
 
 ## Recipes
 
-* `exabgp::default` - Includes the `exabgp_config` and `exabgp_service` resources
+* `exabgp::default` - Intentionally left blank, see resource usage below
 
 ## Resources
 
@@ -35,7 +35,8 @@ the swiss-army knife of networking.
 
 The `exabgp` resource installs and configures ExaBGP. It _does not_ create
 an ExaBGP service. You will need to handle this separately via your service
-resource of choice.
+resource of choice. If you want an example of such a service setup, look at
+the `test/cookbooks` folder for some example recipes.
 
 #### Actions
 

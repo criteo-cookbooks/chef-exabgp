@@ -1,39 +1,37 @@
 sudo: required
-services: docker
-
+dist: trusty
 
 addons:
   apt:
     sources:
-      - chef-stable-precise
+      - chef-stable-trusty
     packages:
       - chefdk
 
 env:
+  global:
+  - KITCHEN_LOCAL_YAML=.kitchen.dokken.yml
   matrix:
-    - INSTANCE=default-ubuntu-1404
-    # - INSTANCE=default-ubuntu-1204
-    # - INSTANCE=source-ubuntu-1404
-    # - INSTANCE=source-ubuntu-1204
+  - KITCHEN_REGEXP=package-ubuntu-1404
+  - KITCHEN_REGEXP=source-ubuntu-1404
+  - KITCHEN_REGEXP=package-ubuntu-1604
+  - KITCHEN_REGEXP=source-ubuntu-1604
+
+matrix:
+  fast_finish: true
 
 # Don't `bundle install` because we're using ChefDK
 install: echo "skip bundle install"
 
 before_script:
-  # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142230889
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
-  - /opt/chefdk/embedded/bin/chef gem install kitchen-docker
+  - chef gem install kitchen-dokken
+  - chef gem install stove
 
-script:
-  - /opt/chefdk/embedded/bin/chef --version
-  - /opt/chefdk/embedded/bin/rubocop --version
-  - /opt/chefdk/embedded/bin/rubocop
-  - /opt/chefdk/embedded/bin/foodcritic --version
-  - /opt/chefdk/embedded/bin/foodcritic . --exclude spec
-  - /opt/chefdk/embedded/bin/rspec
-  # - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
+script: chef exec rake
 
 notifications:
+  email: false
   slack:
-    secure: PTV/w6y8Rl7X0DYAt1p0Ez0FzT8y45HK785P0JYFpoOpjKM54682fDULuFL8LZGzXsyGt8A2btj+lVOo/HMWpFD7ho+K0+5tXolJ4f7GobNz+eKKrGRoOpGgfgKjDqzF44MEqa/W5kFBVLH7t6wW4OpwcaYAlGT4bgw3WONuAkI=
+    secure: "cNz3S0Iw6IWQOzP4IIwSbqMjhPYNOwb6w/9/G1G6YcRTUDEtBY/BwJMdOyMsI568GU+D94oQa7OXswW/XQlb7pWMl4sPQt1VJt7WARsJ0F+Z8ScJtsyn/Tp2gbily2/5VH6paOjw86anrrjhH9cTvBMwROlzLpdYvuszdKpb4dU="

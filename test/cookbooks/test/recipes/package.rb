@@ -35,3 +35,9 @@ exabgp 'template-vars' do
   cookbook 'exabgp-test'
   variables(description: 'A test')
 end
+
+poise_service 'exabgp' do
+  provider :runit
+  command '/usr/local/bin/exabgp /etc/exabgp/exabgp.conf'
+  reload_signal 'USR1'
+end
