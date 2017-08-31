@@ -16,6 +16,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+apt_update 'test' do
+  action :update
+end
 
 exabgp 'default'
 
