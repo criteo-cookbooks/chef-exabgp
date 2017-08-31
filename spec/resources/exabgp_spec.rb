@@ -74,7 +74,7 @@ describe 'test::source' do
 
     it 'creates a default template in the config directory from the test cookbook' do
       expect(chef_run).to create_template('/etc/exabgp-template/exabgp.conf')
-        .with(cookbook: 'exabgp-test')
+        .with(cookbook: 'test')
     end
   end
 
@@ -94,7 +94,7 @@ describe 'test::source' do
     it 'creates a default template in the config directory' do
       expect(chef_run).to create_template('/etc/exabgp-template-vars/exabgp.conf')
         .with(
-          cookbook: 'exabgp-test',
+          cookbook: 'test',
           variables: { description: 'A test' }
         )
     end
