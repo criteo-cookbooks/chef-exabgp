@@ -28,11 +28,11 @@ exabgp 'instance' do
 end
 
 exabgp 'template' do
-  cookbook 'exabgp-test'
+  cookbook 'test'
 end
 
 exabgp 'template-vars' do
-  cookbook 'exabgp-test'
+  cookbook 'test'
   variables(description: 'A test')
 end
 
