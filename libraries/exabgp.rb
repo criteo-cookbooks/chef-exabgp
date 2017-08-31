@@ -38,7 +38,7 @@ module ExabgpCookbook
         mode 0644
       end
 
-      unless instance
+      unless new_resource.instance
         node.default['exabgp']['config_path'] = "/etc/#{installation_name}/exabgp.conf"
       end
     end
