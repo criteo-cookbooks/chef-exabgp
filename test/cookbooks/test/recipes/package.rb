@@ -39,6 +39,8 @@ exabgp 'template-vars' do
   variables(description: 'A test')
 end
 
+include_recipe 'runit'
+
 runit_service 'exabgp' do
   default_logger true
   options({
