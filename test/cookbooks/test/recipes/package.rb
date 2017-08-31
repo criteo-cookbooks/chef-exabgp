@@ -39,8 +39,9 @@ exabgp 'template-vars' do
   variables(description: 'A test')
 end
 
-poise_service 'exabgp' do
-  provider :runit
-  command '/usr/local/bin/exabgp /etc/exabgp/exabgp.conf'
-  reload_signal 'USR1'
+runit_service 'exabgp' do
+  default_logger true
+  options({
+    bin_dir: '/usr/local/bin/exabgp',
+  }.merge(params))
 end
