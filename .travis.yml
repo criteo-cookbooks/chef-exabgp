@@ -20,6 +20,9 @@ env:
 
 matrix:
   fast_finish: true
+  include:
+    - script:
+      - chef exec delivery local all
 
 # Don't `bundle install` because we're using ChefDK
 install: echo "skip bundle install"
@@ -34,7 +37,7 @@ before_script:
   - chef gem install kitchen-dokken
   - chef gem install stove
 
-script: chef exec rake
+script: kitchen verify ${KITCHEN_REGEXP}
 
 notifications:
   email: false
