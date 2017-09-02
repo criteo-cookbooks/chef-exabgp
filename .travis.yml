@@ -18,12 +18,6 @@ env:
   - KITCHEN_REGEXP=package-ubuntu-1604
   - KITCHEN_REGEXP=source-ubuntu-1604
 
-matrix:
-  fast_finish: true
-  include:
-    - script:
-      - chef exec delivery local all
-
 # Don't `bundle install` because we're using ChefDK
 install: echo "skip bundle install"
 
@@ -37,7 +31,9 @@ before_script:
   - chef gem install kitchen-dokken
   - chef gem install stove
 
-script: kitchen verify ${KITCHEN_REGEXP}
+script:
+  - chef exec delivery local all
+  - kitchen verify ${KITCHEN_REGEXP}
 
 notifications:
   email: false
