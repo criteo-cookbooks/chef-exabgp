@@ -13,10 +13,8 @@ env:
   global:
   - KITCHEN_LOCAL_YAML=.kitchen.dokken.yml
   matrix:
-  - KITCHEN_REGEXP=package-ubuntu-1404
-  - KITCHEN_REGEXP=source-ubuntu-1404
-  - KITCHEN_REGEXP=package-ubuntu-1604
-  - KITCHEN_REGEXP=source-ubuntu-1604
+  - KITCHEN_REGEXP=package
+  - KITCHEN_REGEXP=source
 
 # Don't `bundle install` because we're using ChefDK
 install: echo "skip bundle install"
@@ -33,7 +31,7 @@ before_script:
 
 script:
   - chef exec delivery local all
-  - kitchen verify ${KITCHEN_REGEXP}
+  - kitchen verify ${KITCHEN_REGEXP} -c 2
 
 notifications:
   email: false
