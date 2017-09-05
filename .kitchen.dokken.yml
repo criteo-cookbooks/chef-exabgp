@@ -1,3 +1,4 @@
+---
 driver:
   name: dokken
   privileged: true # because Docker and SystemD/Upstart
@@ -8,7 +9,6 @@ transport:
 
 provisioner:
   name: dokken
-  deprecations_as_errors: true
 
 platforms:
 - name: ubuntu-14.04

@@ -26,11 +26,10 @@ before_install:
 before_script:
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
   - chef gem install kitchen-dokken
-  - chef gem install stove
 
 script:
   - chef exec delivery local all
-  - kitchen verify ${KITCHEN_REGEXP} -c 2
+  - kitchen test ${KITCHEN_REGEXP} -c 2
 
 notifications:
   email: false
