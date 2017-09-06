@@ -2,7 +2,7 @@
 # Cookbook Name:: exabgp_service_test
 # Recipe:: default
 #
-# Copyright 2012-2016, DNSimple, Inc.
+# Copyright 2012-2017, Aetrion, LLC dba DNSimple
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+apt_update 'test' do
+  action :update
+end
 
 exabgp 'default'
 
@@ -28,10 +31,19 @@ exabgp 'instance' do
 end
 
 exabgp 'template' do
-  cookbook 'exabgp-test'
+  cookbook 'test'
 end
 
 exabgp 'template-vars' do
-  cookbook 'exabgp-test'
-  variables({ description: 'A test' })
+  cookbook 'test'
+  variables(description: 'A test')
+end
+
+include_recipe 'runit'
+
+runit_service 'exabgp' do
+  default_logger true
+  options({
+    bin_dir: '/usr/local/bin/exabgp',
+  }.merge(params))
 end

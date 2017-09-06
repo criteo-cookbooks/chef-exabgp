@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe 'exabgp' do
+describe 'test::source' do
   cached(:chef_run) do
-    ChefSpec::SoloRunner.new(step_into: ['exabgp']).converge('exabgp_test::default')
+    ChefSpec::SoloRunner.new(step_into: ['exabgp']).converge('test::package')
   end
 
   context 'defaults' do
@@ -74,7 +74,7 @@ describe 'exabgp' do
 
     it 'creates a default template in the config directory from the test cookbook' do
       expect(chef_run).to create_template('/etc/exabgp-template/exabgp.conf')
-        .with(cookbook: 'exabgp-test')
+        .with(cookbook: 'test')
     end
   end
 
@@ -94,9 +94,9 @@ describe 'exabgp' do
     it 'creates a default template in the config directory' do
       expect(chef_run).to create_template('/etc/exabgp-template-vars/exabgp.conf')
         .with(
-        cookbook: 'exabgp-test',
-        variables: { description: 'A test' }
-      )
+          cookbook: 'test',
+          variables: { description: 'A test' }
+        )
     end
   end
 end

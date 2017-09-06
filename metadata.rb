@@ -8,8 +8,7 @@ version          '2.1.0'
 source_url       'https://github.com/dnsimple/chef-exabgp'
 issues_url       'https://github.com/dnsimple/chef-exabgp/issues'
 
-chef_version '>= 12.1'
+chef_version '>= 12.6'
 supports 'ubuntu', '>= 12.04'
 
-depends 'compat_resource', '>= 12.5.11'
 depends 'poise-python'
