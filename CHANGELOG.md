@@ -1,88 +1,62 @@
-# 2.1.0 / 2017-08-28
+# Change Log
 
-## Enhancements
+## [v3.0.0](https://github.com/dnsimple/chef-exabgp/tree/v3.0.0) (2017-09-06)
+[Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/v2.1.0...v3.0.0)
 
-* Added a `package_version` property to allow you to install a specific version
-  of the exabgp python package.
+**Merged pull requests:**
 
-# 2.0.1 / 2017-08-28
+- Campsite and rebuild test suite [\#13](https://github.com/dnsimple/chef-exabgp/pull/13) ([martinisoft](https://github.com/martinisoft))
 
-## Bug Fixes
+## [v2.1.0](https://github.com/dnsimple/chef-exabgp/tree/v2.1.0) (2017-08-28)
+[Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/v2.0.1...v2.1.0)
 
-* Cleanup and begin the process of modernizing this cookbook. The next release
-  will bring this cookbook inline with our other open source cookbooks and
-  prepare it for ExaBGP 4.0.0 which has breaking changes as well.
+**Fixed bugs:**
 
-# 2.0.0 / 2016-02-24
+- Add version pin [\#12](https://github.com/dnsimple/chef-exabgp/pull/12) ([martinisoft](https://github.com/martinisoft))
 
-## Breaking Changes
+## [v2.0.1](https://github.com/dnsimple/chef-exabgp/tree/v2.0.1) (2017-08-28)
+[Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/2.0.0...v2.0.1)
 
-* This cookbook is now Chef 12.1+ only compatible with a simplified resource
-  rewrite. There are some backward-compatible additions noted in the readme.
-  The default recipe now is only there for inclusion to let you use the exabgp
-  resource.
+## [2.0.0](https://github.com/dnsimple/chef-exabgp/tree/2.0.0) (2016-02-24)
+[Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/1.1.1...2.0.0)
 
-## Testing
+**Implemented enhancements:**
 
-* Added a better testing suite. Will add in better test kitchen coverage in the
-  near future.
+- Chef 12 Resource Rewrite [\#9](https://github.com/dnsimple/chef-exabgp/pull/9) ([martinisoft](https://github.com/martinisoft))
 
-# 1.1.1 / 2015-06-17
+## [1.1.1](https://github.com/dnsimple/chef-exabgp/tree/1.1.1) (2015-06-18)
+[Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/1.1.0...1.1.1)
 
-## Cleanup
+## [1.1.0](https://github.com/dnsimple/chef-exabgp/tree/1.1.0) (2015-06-18)
+[Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/1.0.2...1.1.0)
 
-* Changed attribute access to strings instead of symbols. Resolves a
-  Foodcritic warning (FC001)
+**Closed issues:**
 
-# 1.1.0 / 2015-06-17
+- Update installation recipe to use release artifacts [\#2](https://github.com/dnsimple/chef-exabgp/issues/2)
 
-## Enhancements
+**Merged pull requests:**
 
-* Added local-preference attribute to not use ECMP. [PR#6][] [@ton31337][]
-* Merged prefix and route attributes into one. [PR#5][] [PR#7][] [@ton31337][]
+- Fix route\_ipv4 attribute for template [\#7](https://github.com/dnsimple/chef-exabgp/pull/7) ([ton31337](https://github.com/ton31337))
+- Add local-preference attribute to have not ECMP if needed [\#6](https://github.com/dnsimple/chef-exabgp/pull/6) ([ton31337](https://github.com/ton31337))
+- Merge route and prefix attributes [\#5](https://github.com/dnsimple/chef-exabgp/pull/5) ([ton31337](https://github.com/ton31337))
 
-## Testing
+## [1.0.2](https://github.com/dnsimple/chef-exabgp/tree/1.0.2) (2015-02-21)
+[Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/1.0.1...1.0.2)
 
-* Laid the groundwork down for an upcoming LWRP for the 2.x release
+## [1.0.1](https://github.com/dnsimple/chef-exabgp/tree/1.0.1) (2015-01-23)
+[Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/1.0.0...1.0.1)
 
-# 1.0.2 / 2015-02-21
+## [1.0.0](https://github.com/dnsimple/chef-exabgp/tree/1.0.0) (2015-01-23)
+[Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/0.10.0...1.0.0)
 
-## Enhancements
+## [0.10.0](https://github.com/dnsimple/chef-exabgp/tree/0.10.0) (2015-01-19)
+[Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/0.9.0...0.10.0)
 
-* Added in a new attribute to allow for disabling the static route in the
-  exabgp config template
+## [0.9.0](https://github.com/dnsimple/chef-exabgp/tree/0.9.0) (2015-01-19)
+**Closed issues:**
 
-# 1.0.1 / 2015-01-23
+- IPv6 support [\#1](https://github.com/dnsimple/chef-exabgp/issues/1)
 
-## Bug Fixes
 
-* Sync to master for now to resolve a parse bug with incorrect community
-  information
 
-# 1.0.0 / 2015-01-23
-
-## Cleanup
-
-* Updated README and LICENSE, much more to come in the next few releases
-
-## Breaking Changes
-
-* Changed source install to point to the GitHub repository. They moved over
-  a year ago, it's time we moved too. This also means we use git and dropped
-  the mercurial cookbook dependency
-* Defaulted to latest release at the time (3.4.7)
-
-# 0.10.0 / 2015-01-19
-
-## Enhancements
-
-* Adding berkshelf integration
-
-# 0.9.0 / 2013-07-11
-
-* Initial release of exabgp
-
-[PR#5]: https://github.com/aetrion/exabgp-cookbook/pull/5
-[PR#6]: https://github.com/aetrion/exabgp-cookbook/pull/6
-[PR#7]: https://github.com/aetrion/exabgp-cookbook/pull/7
-[@ton31337]: https://github.com/ton31337
+\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
