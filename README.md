@@ -44,19 +44,11 @@ the `test/cookbooks` folder for some example recipes.
 
 #### Parameters
 
-* `instance` – Name of the ExaBGP installation. If different than the name
-                parameter of the resource. If it is set to false, it will
-                not use the name parameter when naming the instance. This
-                is for backward compatibility with the older version of this
-                cookbook where you may be running an install from
-                `/etc/exabgp`.
-* `package_version` – Which version of the python package to install, defaults
-                      to the `node['exabgp']['package_version'] attribute.
+* `instance` – Name of the ExaBGP installation. If different than the name parameter of the resource. If it is set to false, it will not use the name parameter when naming the instance. This is for backward compatibility with the older version of this cookbook where you may be running an install from `/etc/exabgp`.
+* `package_version` – Which version of the python package to install, defaults to the `node['exabgp']['package_version'] attribute.
 * `cookbook` – Which cookbook to look for the exabgp.conf.erb template
 * `variables` – Pass template variables in much like a template resource
-* `install_type` – Supports both :package and :source installations. Defaults
-                    to :package via python pip. If you'd like to support more
-                    installation options, send in a pull request. :heart:
+* `install_type` – Supports three type :package (distribution package), :pip (python package) and :source installations. Defaults to :package . If you'd like to support more installation options, send in a pull request. :heart:
 
 #### Examples
 
