@@ -13,6 +13,7 @@ env:
   global:
   - KITCHEN_LOCAL_YAML=.kitchen.dokken.yml
   matrix:
+  - KITCHEN_REGEXP=pip
   - KITCHEN_REGEXP=package
   - KITCHEN_REGEXP=source
 
