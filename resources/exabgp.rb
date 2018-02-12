@@ -13,14 +13,14 @@ action :install do
   when :package
     package 'exabgp' do
       action :install
-      version new_resource.package_version unless new_resource.package_version.nil?
+      version new_resource.package_version if property_is_set?(:package_version)
     end
   when :pip
     include_recipe 'poise-python'
 
     python_package 'exabgp' do
       action :install
-      version new_resource.package_version
+      version new_resource.package_version if property_is_set?(:package_version)
     end
   when :source
     package 'git-core'
