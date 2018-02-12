@@ -1,5 +1,13 @@
 # Change Log
 
+## [v3.1.0](https://github.com/dnsimple/chef-exabgp/tree/v3.1.0) (2018-02-12)
+[Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/v3.0.0...v3.1.0)
+
+**Merged pull requests:**
+
+- Add distribution packages [\#16](https://github.com/dnsimple/chef-exabgp/pull/16) ([jmauro](https://github.com/jmauro))
+- Testing to chef 13 [\#14](https://github.com/dnsimple/chef-exabgp/pull/14) ([onlyhavecans](https://github.com/onlyhavecans))
+
 ## [v3.0.0](https://github.com/dnsimple/chef-exabgp/tree/v3.0.0) (2017-09-06)
 [Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/v2.1.0...v3.0.0)
 
