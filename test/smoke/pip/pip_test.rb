@@ -1,4 +1,4 @@
-describe package('exabgp') do
+describe pip('exabgp') do
   it { should be_installed }
 end
 

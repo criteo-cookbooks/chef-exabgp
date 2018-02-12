@@ -20,37 +20,21 @@ apt_update 'test' do
   action :update
 end
 
-pkg_ver = if node['platform_version'] == '14.04'
-            '3.1.9-1'
-          else
-            '3.4.13-1'
-          end
-exabgp 'default' do
-  install_type :package
-  package_version pkg_ver
-end
+exabgp 'default'
 
 exabgp 'false_instance' do
-  install_type :package
-  package_version pkg_ver
   instance false
 end
 
 exabgp 'instance' do
-  install_type :package
-  package_version pkg_ver
   instance 'anycast'
 end
 
 exabgp 'template' do
-  install_type :package
-  package_version pkg_ver
   cookbook 'test'
 end
 
 exabgp 'template-vars' do
-  install_type :package
-  package_version pkg_ver
   cookbook 'test'
   variables(description: 'A test')
 end
@@ -60,6 +44,6 @@ include_recipe 'runit'
 runit_service 'exabgp' do
   default_logger true
   options({
-    bin_dir: '/usr/sbin/exabgp',
+    bin_dir: '/usr/local/bin/exabgp',
   }.merge(params))
 end

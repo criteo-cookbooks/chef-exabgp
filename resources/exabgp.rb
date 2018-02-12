@@ -1,7 +1,7 @@
 resource_name :exabgp
 
 property :instance, [String, false], name_property: true
-property :install_type, Symbol, default: :package
+property :install_type, Symbol, default: :pip
 property :package_version, String, default: lazy { node['exabgp']['package_version'] }
 property :cookbook, String
 property :variables, Hash
@@ -11,6 +11,11 @@ include ExabgpCookbook::Helpers
 action :install do
   case new_resource.install_type
   when :package
+    package 'exabgp' do
+      action :install
+      version new_resource.package_version unless new_resource.package_version.nil?
+    end
+  when :pip
     include_recipe 'poise-python'
 
     python_package 'exabgp' do

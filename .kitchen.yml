@@ -14,12 +14,12 @@ platforms:
   - name: ubuntu-16.04
 
 suites:
-  - name: package
+  - name: pip
     run_list:
-      - recipe[test::package]
+      - recipe[test::pip]
     verifier:
       inspec_tests:
-        - test/smoke/package
+        - test/smoke/pip
     attributes:
   - name: source
     run_list:
@@ -27,4 +27,11 @@ suites:
     verifier:
       inspec_tests:
         - test/smoke/source
+    attributes:
+  - name: package
+    run_list:
+      - recipe[test::package]
+    verifier:
+      inspec_tests:
+        - test/smoke/package
     attributes:
