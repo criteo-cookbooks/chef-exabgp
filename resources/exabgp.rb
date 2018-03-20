@@ -9,6 +9,11 @@ property :variables, Hash
 include ExabgpCookbook::Helpers
 
 action :install do
+  log 'deprecation_warning' do
+    message '***EXABGP COOKBOOK DEPRECATION NOTICE!*** The exabgp resource will be replaced by exabgp_install in a future release. It will also only support Chef 13.8+ so please pin your version now to avoid issues in the very near future! See README for migration details.'
+    level :warn
+  end
+
   case new_resource.install_type
   when :package
     package 'exabgp' do
