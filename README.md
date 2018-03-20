@@ -3,12 +3,17 @@
 Installs and configures [ExaBGP](https://github.com/Exa-Networks/exabgp)
 the swiss-army knife of networking.
 
+## DEPRECATION NOTICE
+
+The 3.x series is the last of Chef 12 compatible releases and will now provide
+ample warnings in your logs. The 4.x release will be Chef 13.8+ compatible and
+feature partially re-written and updated resources for better maintainability.
+
 ## Supported Chef and Platforms
 
 * Chef 12.6 and newer
 
-* Ubuntu 14.04
-* Ubuntu 16.04
+* Ubuntu 14.04 and newer
 
 ## Dependencies
 
