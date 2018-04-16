@@ -16,7 +16,10 @@ action :install do
       version new_resource.package_version unless new_resource.package_version.nil?
     end
   when :pip
-    include_recipe 'poise-python'
+    python_runtime '2' do
+      # TODO: remove this when pip 10 is supported https://github.com/poise/poise-python/pull/108
+      pip_version '9.0.3'
+    end
 
     python_package 'exabgp' do
       action :install
