@@ -1,5 +1,17 @@
 # Change Log
 
+## [v3.1.1](https://github.com/dnsimple/chef-exabgp/tree/v3.1.1) (2018-04-16)
+[Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/v3.1.0...v3.1.1)
+
+**Implemented enhancements:**
+
+- ExaBGP rpm install [\#15](https://github.com/dnsimple/chef-exabgp/issues/15)
+
+**Merged pull requests:**
+
+- Pin back pip as pose-python is broken [\#19](https://github.com/dnsimple/chef-exabgp/pull/19) ([onlyhavecans](https://github.com/onlyhavecans))
+- Remove all dead legacy code [\#17](https://github.com/dnsimple/chef-exabgp/pull/17) ([jmauro](https://github.com/jmauro))
+
 ## [v3.1.0](https://github.com/dnsimple/chef-exabgp/tree/v3.1.0) (2018-02-12)
 [Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/v3.0.0...v3.1.0)
 
