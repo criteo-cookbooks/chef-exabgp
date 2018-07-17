@@ -1,6 +1,6 @@
 resource_name :exabgp
 
-property :instance, String, name_property: true
+property :instance, [String, false], name_property: true
 property :install_type, Symbol, default: :pip
 property :package_version, String, default: lazy { node['exabgp']['package_version'] }
 property :cookbook, String, default: 'exabgp'
@@ -48,5 +48,7 @@ action :install do
     mode 0644
   end
 
-  node.default['exabgp']['config_path'] = "/etc/#{installation_name(new_resource.instance)}/exabgp.conf"
+  unless new_resource.instance
+    node.default['exabgp']['config_path'] = "/etc/#{installation_name(new_resource.instance)}/exabgp.conf"
+  end
 end
