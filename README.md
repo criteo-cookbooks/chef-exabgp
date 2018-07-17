@@ -15,6 +15,8 @@ To migrate your current resource over to the 4.x series, you'll need to do a few
 
 * Upgrade to Chef 13.10 or higher
 * Rename any instance of `exabgp` to `exabgp_install`
+* Set the `package_version` in your `exabgp_install` resource. Cookbook attributes
+  will be eliminated in the future release
 * Migrate any cookbook attributes you have set to their relevant properties in
   the new `exabgp_install` or `exabgp_config` resource, this includes:
     * `package_version`
