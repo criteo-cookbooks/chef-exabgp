@@ -1,5 +1,7 @@
 resource_name :exabgp
 
+deprecated 'The exabgp resource has been replaced by the exabgp_install, exabgp_config, and exabgp_service resources. Please see the README for an upgrade guide. It will be removed in the 5.0 release of this cookook.'
+
 property :instance, [String, false], name_property: true
 property :install_type, Symbol, default: :pip
 property :package_version, String, default: lazy { node['exabgp']['package_version'] }
