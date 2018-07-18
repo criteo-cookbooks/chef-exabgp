@@ -9,6 +9,6 @@ source_url       'https://github.com/dnsimple/chef-exabgp'
 issues_url       'https://github.com/dnsimple/chef-exabgp/issues'
 
 chef_version '>= 12.6'
-supports 'ubuntu', '>= 12.04'
+supports 'ubuntu', '>= 14.04'
 
 depends 'poise-python'

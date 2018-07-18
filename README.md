@@ -3,12 +3,33 @@
 Installs and configures [ExaBGP](https://github.com/Exa-Networks/exabgp)
 the swiss-army knife of networking.
 
+## DEPRECATION NOTICE and Migration to Chef 13.10+
+
+The 3.x series is the last of Chef 12 compatible releases and will now provide
+ample warnings in your logs. The 4.x release will be Chef 13.8+ compatible and
+feature partially re-written and updated install and config resource for better
+maintainability. The 5.x series will remove the exabgp resource along with the
+attributes in this cookbook.
+
+To migrate your current resource over to the 4.x series, you'll need to do a few things:
+
+* Upgrade to Chef 13.10 or higher
+* Rename any instance of `exabgp` to `exabgp_install`
+* Set the `package_version` in your `exabgp_install` resource. Cookbook attributes
+  will be eliminated in the future release
+* Migrate any cookbook attributes you have set to their relevant properties in
+  the new `exabgp_install` or `exabgp_config` resource, this includes:
+    * `package_version`
+    * `source_url`
+    * `source_version`
+* In each of those instances, if you have the `instance` property set, rename
+  it to `instance_name` in the `exabgp_config` resource
+
 ## Supported Chef and Platforms
 
 * Chef 12.6 and newer
 
-* Ubuntu 14.04
-* Ubuntu 16.04
+* Ubuntu 14.04 and newer
 
 ## Dependencies
 
@@ -45,7 +66,7 @@ the `test/cookbooks` folder for some example recipes.
 #### Parameters
 
 * `instance` – Name of the ExaBGP installation. If different than the name parameter of the resource. If it is set to false, it will not use the name parameter when naming the instance. This is for backward compatibility with the older version of this cookbook where you may be running an install from `/etc/exabgp`.
-* `package_version` – Which version of the python package to install, defaults to the `node['exabgp']['package_version'] attribute.
+* `package_version` – Which version of the python package to install, defaults to the `node['exabgp']['package_version']` attribute.
 * `cookbook` – Which cookbook to look for the exabgp.conf.erb template
 * `variables` – Pass template variables in much like a template resource
 * `install_type` – Supports three type :package (distribution package), :pip (python package) and :source installations. Defaults to :package . If you'd like to support more installation options, send in a pull request. :heart:
@@ -77,7 +98,7 @@ service 'exabgp'
 * Author:: [Jacobo Garcia](https://github.com/therobot)
 * Author:: [Joseph Caudle](https://github.com/jcaudle)
 
-Copyright:: 2013-2017 Aetrion, LLC dba DNSimple
+Copyright:: 2013-2018 DNSimple Corp.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
