@@ -1,5 +1,12 @@
 # Change Log
 
+## [v3.2.0](https://github.com/dnsimple/chef-exabgp/tree/v3.2.0) (2018-07-18)
+[Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/v3.1.1...v3.2.0)
+
+**Implemented enhancements:**
+
+- Deprecate Chef 12 and Ubuntu 12.04 support [\#20](https://github.com/dnsimple/chef-exabgp/pull/20) ([martinisoft](https://github.com/martinisoft))
+
 ## [v3.1.1](https://github.com/dnsimple/chef-exabgp/tree/v3.1.1) (2018-04-16)
 [Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/v3.1.0...v3.1.1)
 
