@@ -1,6 +1,6 @@
 #
-# Cookbook Name:: exabgp_service_test
-# Recipe:: default
+# Cookbook Name:: test
+# Recipe:: package
 #
 # Copyright 2012-2018 DNSimple Corp
 #
