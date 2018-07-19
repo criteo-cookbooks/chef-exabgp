@@ -16,50 +16,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-apt_update 'test' do
-  action :update
-end
 
-pkg_ver = if node['platform_version'] == '14.04'
-            '3.1.9-1'
-          else
-            '3.4.13-1'
-          end
-exabgp 'default' do
-  install_type :package
-  package_version pkg_ver
-end
+apt_update 'apt_updater'
 
-exabgp 'false_instance' do
-  install_type :package
-  package_version pkg_ver
-  instance false
-end
+exabgp_install 'default'
 
-exabgp 'instance' do
-  install_type :package
-  package_version pkg_ver
-  instance 'anycast'
-end
+exabgp_config 'default'
 
-exabgp 'template' do
-  install_type :package
-  package_version pkg_ver
+exabgp_config 'template-vars' do
+  instance_name 'custom_description'
   cookbook 'test'
+  variables(description: 'Custom description')
 end
 
-exabgp 'template-vars' do
-  install_type :package
-  package_version pkg_ver
-  cookbook 'test'
-  variables(description: 'A test')
+exabgp_service 'default' do
+  service_type :runit
+  action [:enable, :start]
 end
 
-include_recipe 'runit'
-
-runit_service 'exabgp' do
-  default_logger true
-  options({
-    bin_dir: '/usr/sbin/exabgp',
-  }.merge(params))
+exabgp_service 'custom' do
+  service_type :runit
+  install_name 'default'
+  config_name 'template-vars'
+  action [:enable, :start]
 end
