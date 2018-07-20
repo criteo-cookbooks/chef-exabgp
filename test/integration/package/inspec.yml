@@ -1,0 +1,10 @@
+name: package
+title: Package installation test
+maintainer: DNSimple Corp.
+copyright: DNSimple Corp.
+copyright_email: ops@dnsimple.com
+license: Apache 2 license
+summary: Verifies a package installation of ExaBGP via the Test Cookbook
+version: 1.0.0
+supports:
+  - os-family: linux

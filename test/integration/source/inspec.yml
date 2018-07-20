@@ -1,0 +1,10 @@
+name: source
+title: Source installation test
+maintainer: DNSimple Corp.
+copyright: DNSimple Corp.
+copyright_email: ops@dnsimple.com
+license: Apache 2 license
+summary: Verifies a source installation of ExaBGP via the Test Cookbook works as expected
+version: 1.0.0
+supports:
+  - os-family: linux
