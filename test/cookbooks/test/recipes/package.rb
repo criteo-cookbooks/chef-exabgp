@@ -24,7 +24,7 @@ exabgp_install 'default'
 exabgp_config 'default'
 
 exabgp_config 'template-vars' do
-  instance_name 'custom_description'
+  config_name 'custom_description'
   cookbook 'test'
   variables(description: 'Custom description')
 end

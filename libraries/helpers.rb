@@ -8,7 +8,7 @@ module ExabgpCookbook
       end
     end
 
-    def exabgp_instance_name(config_name: 'exabgp')
+    def exabgp_instance_name(config_name = 'exabgp')
       if config_name == 'exabgp'
         'exabgp'
       else
