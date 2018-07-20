@@ -50,6 +50,11 @@ action :enable do
         config_path: config_resource.config_path,
       )
     end
+  else
+    find_resource(:service, 'exabgp') do
+      supports restart: true, reload: true
+      action :enable
+    end
   end
 end
 

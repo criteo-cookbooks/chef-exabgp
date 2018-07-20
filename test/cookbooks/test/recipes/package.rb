@@ -30,7 +30,6 @@ exabgp_config 'template-vars' do
 end
 
 exabgp_service 'default' do
-  service_type :runit
   action [:enable, :start]
 end
 
