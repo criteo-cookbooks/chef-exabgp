@@ -2,7 +2,7 @@
 # Cookbook Name:: exabgp_service_test
 # Recipe:: default
 #
-# Copyright 2012-2017, DNSimple Corp
+# Copyright 2012-2018 DNSimple Corp
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
