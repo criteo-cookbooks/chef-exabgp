@@ -1,5 +1,5 @@
 name             'exabgp'
-maintainer       'Aetrion, LLC dba DNSimple'
+maintainer       'DNSimple Corp'
 maintainer_email 'ops@dnsimple.com'
 license          'Apache-2.0'
 description      'Installs/Configures exabgp'
