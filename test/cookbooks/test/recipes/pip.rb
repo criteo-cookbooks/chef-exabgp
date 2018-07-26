@@ -36,7 +36,6 @@ exabgp_service 'default' do
 end
 
 exabgp_service 'custom' do
-  service_type :runit
   install_name 'pip-install'
   config_name 'template-vars'
   action [:enable, :start]

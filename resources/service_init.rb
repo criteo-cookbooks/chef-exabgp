@@ -17,12 +17,13 @@
 # limitations under the License.
 #
 
-property :service_type, Symbol, equal_to: [:init, :runit]
+provides :exabgp_service do |node|
+  node['init_package'] == 'init' || node['init_package'] == 'upstart'
+end
+
 property :bin_location, String, default: '/usr/sbin/exabgp'
 property :install_name, String
 property :config_name, String
-property :cookbook, String, default: 'exabgp'
-property :variables, Hash
 
 action :enable do
   install_resource = if new_resource.install_name
@@ -39,23 +40,33 @@ action :enable do
 
   service_name = exabgp_instance_name(config_resource.config_name)
 
-  case new_resource.service_type
-  when :runit
-    include_recipe 'runit'
+  template "/etc/init.d/#{service_name}" do
+    source 'sysvinit.sh.erb'
+    owner 'root'
+    group node['root_group']
+    mode '0755'
+    cookbook 'exabgp'
+    variables(
+      name: service_name,
+      platform_family: node['platform_family'],
+      pid_file: "/var/run/exabgp/#{service_name}",
+      user: 'exabgp',
+      daemon: install_resource.bin_path,
+      directory: '/etc/exabgp'
+    )
+  end
 
-    runit_service service_name do
-      default_logger true
-      cookbook new_resource.cookbook
-      options(
-        bin_path: install_resource.bin_path,
-        config_path: config_resource.config_path
-      )
+  service service_name do
+    case node['platform_family']
+    when 'debian'
+      provider Chef::Provider::Service::Debian
+    when 'rhel', 'amazon'
+      provider Chef::Provider::Service::Redhat
+    else
+      provider Chef::Provider::Service::Init
     end
-  else
-    find_resource(:service, 'exabgp') do
-      supports restart: true, reload: true
-      action :enable
-    end
+    supports restart: true, reload: true
+    action :enable
   end
 end
 

@@ -21,12 +21,9 @@ provides :exabgp_service, os: 'linux' do |node|
   node['init_package'] == 'systemd'
 end
 
-property :service_type, Symbol, equal_to: [:runit, :systemd]
 property :bin_location, String, default: '/usr/sbin/exabgp'
 property :install_name, String
 property :config_name, String
-property :cookbook, String, default: 'exabgp'
-property :variables, Hash
 
 action :enable do
   install_resource = if new_resource.install_name
