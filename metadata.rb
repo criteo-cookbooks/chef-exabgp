@@ -12,4 +12,3 @@ chef_version '>= 13.10'
 supports 'ubuntu', '>= 14.04'
 
 depends 'poise-python'
-depends 'runit'
