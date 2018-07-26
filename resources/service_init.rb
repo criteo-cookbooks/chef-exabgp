@@ -22,25 +22,26 @@ provides :exabgp_service do |node|
 end
 
 property :bin_location, String, default: '/usr/sbin/exabgp'
+property :run_location, String, default: '/var/run/exabgp'
 property :install_name, String
 property :config_name, String
 
 action :enable do
-  find_or_create_service do
-    action :enable
-  end
+  control_service(:enable)
 end
 
 action :start do
-  find_or_create_service do
-    action :start
-  end
+  control_service(:start)
 end
 
 action_class do
   include ExabgpCookbook::Helpers
 
-  def find_or_create_service
+  def pid_location
+    "#{new_resource.run_location}/#{service_name}.pid"
+  end
+
+  def control_service(service_action)
     find_resource(:template, "/etc/init.d/#{service_name}") do
       source 'sysvinit.sh.erb'
       owner 'root'
@@ -50,11 +51,17 @@ action_class do
       variables(
         name: service_name,
         platform_family: node['platform_family'],
-        pid_file: "/var/run/exabgp/#{service_name}",
+        pid_file: pid_location,
         user: 'exabgp',
-        daemon: install_resource.bin_path,
+        daemon: "#{install_resource.bin_path} #{config_resource.config_path}",
         directory: '/etc/exabgp'
       )
+      action :create
+    end
+
+    find_resource(:directory, new_resource.run_location) do
+      owner 'exabgp'
+      group 'exabgp'
       action :create
     end
 
@@ -68,6 +75,7 @@ action_class do
         provider Chef::Provider::Service::Init
       end
       supports restart: true, reload: true
+      action service_action
     end
   end
 end

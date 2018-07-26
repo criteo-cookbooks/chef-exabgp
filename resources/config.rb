@@ -32,6 +32,8 @@ action :create do
   directory new_resource.config_dir
 
   template new_resource.config_path do
+    owner 'exabgp'
+    group 'exabgp'
     cookbook new_resource.cookbook
     source 'exabgp.conf.erb'
     variables(new_resource.variables)

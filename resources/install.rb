@@ -37,16 +37,23 @@ action :install do
   when :pip
     python_runtime '3'
 
+    user 'exabgp' do
+      system true
+    end
+
     python_virtualenv 'exabgp' do
       path '/opt/exabgp'
+      user 'exabgp'
     end
 
     python_package 'exabgp' do
       action :install
       version new_resource.package_version if new_resource.package_version
       virtualenv 'exabgp'
+      user 'exabgp'
     end
-    new_resource.bin_path = '/usr/local/bin/exabgp'
+
+    new_resource.bin_path = '/opt/exabgp/bin/exabgp'
   when :source
     package 'git-core'
 
