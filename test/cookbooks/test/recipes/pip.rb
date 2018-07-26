@@ -16,34 +16,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-apt_update 'test' do
-  action :update
+apt_update 'apt_updater'
+
+exabgp_install 'pip-install' do
+  install_type :pip
 end
 
-exabgp 'default'
+exabgp_config 'default'
 
-exabgp 'false_instance' do
-  instance false
-end
-
-exabgp 'instance' do
-  instance 'anycast'
-end
-
-exabgp 'template' do
+exabgp_config 'template-vars' do
+  config_name 'custom_description'
   cookbook 'test'
+  variables(description: 'Custom description')
 end
 
-exabgp 'template-vars' do
-  cookbook 'test'
-  variables(description: 'A test')
+exabgp_service 'default' do
+  install_name 'pip-install'
+  action [:enable, :start]
 end
 
-include_recipe 'runit'
-
-runit_service 'exabgp' do
-  default_logger true
-  options({
-    bin_dir: '/usr/local/bin/exabgp',
-  }.merge(params))
+exabgp_service 'custom' do
+  service_type :runit
+  install_name 'pip-install'
+  config_name 'template-vars'
+  action [:enable, :start]
 end

@@ -17,6 +17,10 @@
 # limitations under the License.
 #
 
+provides :exabgp_service, os: 'linux' do |node|
+  node['init_package'] == 'systemd'
+end
+
 property :service_type, Symbol, equal_to: [:runit, :systemd]
 property :bin_location, String, default: '/usr/sbin/exabgp'
 property :install_name, String
@@ -39,23 +43,26 @@ action :enable do
 
   service_name = exabgp_instance_name(config_resource.config_name)
 
-  case new_resource.service_type
-  when :runit
-    include_recipe 'runit'
-
-    runit_service service_name do
-      default_logger true
-      cookbook new_resource.cookbook
-      options(
-        bin_path: install_resource.bin_path,
-        config_path: config_resource.config_path
-      )
-    end
-  else
-    find_resource(:service, 'exabgp') do
-      supports restart: true, reload: true
-      action :enable
-    end
+  systemd_unit "#{service_name}.service" do
+    content(
+      Unit: {
+        Description: 'ExaBGP',
+        Documentation: 'https://github.com/Exa-Networks/exabgp/wiki',
+        After: 'network.target',
+        ConditionPathExists: config_resource.config_path,
+      },
+      Service: {
+        Environment: 'exabgp_daemon_daemonize=false',
+        ExecStart: "#{install_resource.bin_path} #{config_resource.config_path}",
+        ExecReload: '/bin/kill -USR1 $MAINPID',
+        SuccessExitStatus: '0 1',
+      },
+      Install: {
+        WantedBy: 'multi-user.target',
+      }
+    )
+    verify false
+    action [:create, :enable]
   end
 end
 

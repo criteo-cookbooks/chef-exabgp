@@ -46,6 +46,7 @@ action :install do
       version new_resource.package_version if new_resource.package_version
       virtualenv 'exabgp'
     end
+    new_resource.bin_path = '/usr/local/bin/exabgp'
   when :source
     package 'git-core'
 
