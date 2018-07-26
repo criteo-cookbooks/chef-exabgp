@@ -23,5 +23,21 @@ module ExabgpCookbook
         "#{config_path}/exabgp-#{config_name}.conf"
       end
     end
+
+    def install_resource
+      if new_resource.install_name
+        find_resource(:exabgp_install, new_resource.install_name)
+      else
+        find_resource(:exabgp_install, 'default')
+      end
+    end
+
+    def config_resource
+      if new_resource.config_name
+        find_resource(:exabgp_config, new_resource.config_name)
+      else
+        find_resource(:exabgp_config, 'default')
+      end
+    end
   end
 end
