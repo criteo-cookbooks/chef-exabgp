@@ -26,41 +26,48 @@ property :install_name, String
 property :config_name, String
 
 action :enable do
-  service_name = exabgp_instance_name(config_resource.config_name)
-
-  template "/etc/init.d/#{service_name}" do
-    source 'sysvinit.sh.erb'
-    owner 'root'
-    group node['root_group']
-    mode '0755'
-    cookbook 'exabgp'
-    variables(
-      name: service_name,
-      platform_family: node['platform_family'],
-      pid_file: "/var/run/exabgp/#{service_name}",
-      user: 'exabgp',
-      daemon: install_resource.bin_path,
-      directory: '/etc/exabgp'
-    )
-  end
-
-  service service_name do
-    case node['platform_family']
-    when 'debian'
-      provider Chef::Provider::Service::Debian
-    when 'rhel', 'amazon'
-      provider Chef::Provider::Service::Redhat
-    else
-      provider Chef::Provider::Service::Init
-    end
-    supports restart: true, reload: true
+  find_or_create_service do
     action :enable
   end
 end
 
 action :start do
+  find_or_create_service do
+    action :start
+  end
 end
 
 action_class do
   include ExabgpCookbook::Helpers
+
+  def find_or_create_service
+    find_resource(:template, "/etc/init.d/#{service_name}") do
+      source 'sysvinit.sh.erb'
+      owner 'root'
+      group node['root_group']
+      mode '0755'
+      cookbook 'exabgp'
+      variables(
+        name: service_name,
+        platform_family: node['platform_family'],
+        pid_file: "/var/run/exabgp/#{service_name}",
+        user: 'exabgp',
+        daemon: install_resource.bin_path,
+        directory: '/etc/exabgp'
+      )
+      action :create
+    end
+
+    edit_resource(:service, service_name) do
+      case node['platform_family']
+      when 'debian'
+        provider Chef::Provider::Service::Debian
+      when 'rhel', 'amazon'
+        provider Chef::Provider::Service::Redhat
+      else
+        provider Chef::Provider::Service::Init
+      end
+      supports restart: true, reload: true
+    end
+  end
 end

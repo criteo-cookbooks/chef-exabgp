@@ -39,5 +39,9 @@ module ExabgpCookbook
         find_resource(:exabgp_config, 'default')
       end
     end
+
+    def service_name
+      exabgp_instance_name(config_resource.config_name)
+    end
   end
 end
