@@ -1,4 +1,4 @@
-describe pip('exabgp', '/opt/exabgp/bin/pip') do
+describe pip('exabgp', '/opt/exabgp/venv/bin/pip') do
   it { should be_installed }
 end
 

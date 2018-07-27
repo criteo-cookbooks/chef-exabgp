@@ -41,8 +41,13 @@ action :install do
       system true
     end
 
+    directory '/opt/exabgp' do
+      user 'exabgp'
+      group 'exabgp'
+    end
+
     python_virtualenv 'exabgp' do
-      path '/opt/exabgp'
+      path '/opt/exabgp/venv'
       user 'exabgp'
     end
 
@@ -53,7 +58,7 @@ action :install do
       user 'exabgp'
     end
 
-    new_resource.bin_path = '/opt/exabgp/bin/exabgp'
+    new_resource.bin_path = '/opt/exabgp/venv/bin/exabgp'
   when :source
     package 'git-core'
 

@@ -53,7 +53,9 @@ action_class do
         platform_family: node['platform_family'],
         pid_file: pid_location,
         user: 'exabgp',
-        daemon: "#{install_resource.bin_path} #{config_resource.config_path}",
+        daemon: install_resource.bin_path,
+        config_path: config_resource.config_path,
+        command: "#{install_resource.bin_path} #{config_resource.config_path}",
         directory: '/etc/exabgp'
       )
       action :create

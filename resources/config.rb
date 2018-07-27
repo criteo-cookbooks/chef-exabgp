@@ -29,7 +29,10 @@ action :create do
                                                   config_name: new_resource.config_name)
   end
 
-  directory new_resource.config_dir
+  directory new_resource.config_dir do
+    user 'exabgp'
+    group 'exabgp'
+  end
 
   template new_resource.config_path do
     owner 'exabgp'
