@@ -26,6 +26,33 @@ property :run_location, String, default: '/var/run/exabgp'
 property :install_name, String
 property :config_name, String
 
+action :create do
+  template "/etc/init.d/#{service_name}" do
+    source 'sysvinit.sh.erb'
+    owner 'root'
+    group node['root_group']
+    mode '0755'
+    cookbook 'exabgp'
+    variables(
+      name: service_name,
+      platform_family: node['platform_family'],
+      pid_file: pid_location,
+      user: 'exabgp',
+      daemon: install_resource.bin_path,
+      config_path: config_resource.config_path,
+      command: "#{install_resource.bin_path} #{config_resource.config_path}",
+      directory: '/etc/exabgp'
+    )
+    action :create
+  end
+
+  directory new_resource.run_location do
+    owner 'exabgp'
+    group 'exabgp'
+    action :create
+  end
+end
+
 action :enable do
   control_service(:enable)
 end
@@ -42,31 +69,6 @@ action_class do
   end
 
   def control_service(service_action)
-    find_resource(:template, "/etc/init.d/#{service_name}") do
-      source 'sysvinit.sh.erb'
-      owner 'root'
-      group node['root_group']
-      mode '0755'
-      cookbook 'exabgp'
-      variables(
-        name: service_name,
-        platform_family: node['platform_family'],
-        pid_file: pid_location,
-        user: 'exabgp',
-        daemon: install_resource.bin_path,
-        config_path: config_resource.config_path,
-        command: "#{install_resource.bin_path} #{config_resource.config_path}",
-        directory: '/etc/exabgp'
-      )
-      action :create
-    end
-
-    find_resource(:directory, new_resource.run_location) do
-      owner 'exabgp'
-      group 'exabgp'
-      action :create
-    end
-
     edit_resource(:service, service_name) do
       case node['platform_family']
       when 'debian'

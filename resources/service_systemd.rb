@@ -25,35 +25,42 @@ property :bin_location, String, default: '/usr/sbin/exabgp'
 property :install_name, String
 property :config_name, String
 
-action :enable do
-  service_name = exabgp_instance_name(config_resource.config_name)
+action :create do
+  control_service(:create)
+end
 
-  systemd_unit "#{service_name}.service" do
-    content(
-      Unit: {
-        Description: 'ExaBGP',
-        Documentation: 'https://github.com/Exa-Networks/exabgp/wiki',
-        After: 'network.target',
-        ConditionPathExists: config_resource.config_path,
-      },
-      Service: {
-        Environment: 'exabgp_daemon_daemonize=false',
-        ExecStart: "#{install_resource.bin_path} #{config_resource.config_path}",
-        ExecReload: '/bin/kill -USR1 $MAINPID',
-        SuccessExitStatus: '0 1',
-      },
-      Install: {
-        WantedBy: 'multi-user.target',
-      }
-    )
-    verify false
-    action [:create, :enable]
-  end
+action :enable do
+  control_service(:enable)
 end
 
 action :start do
+  control_service(:start)
 end
 
 action_class do
   include ExabgpCookbook::Helpers
+
+  def control_service(service_action)
+    edit_resource(:systemd_unit, "#{service_name}.service") do
+      content(
+        Unit: {
+          Description: 'ExaBGP',
+          Documentation: 'https://github.com/Exa-Networks/exabgp/wiki',
+          After: 'network.target',
+          ConditionPathExists: config_resource.config_path,
+        },
+        Service: {
+          Environment: 'exabgp_daemon_daemonize=false',
+          ExecStart: "#{install_resource.bin_path} #{config_resource.config_path}",
+          ExecReload: '/bin/kill -USR1 $MAINPID',
+          SuccessExitStatus: '0 1',
+        },
+        Install: {
+          WantedBy: 'multi-user.target',
+        }
+      )
+      verify false
+      action service_action
+    end
+  end
 end

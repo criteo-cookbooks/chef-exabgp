@@ -32,11 +32,11 @@ end
 
 exabgp_service 'default' do
   install_name 'pip-install'
-  action [:enable, :start]
+  action [:create, :enable, :start]
 end
 
 exabgp_service 'custom' do
   install_name 'pip-install'
   config_name 'template-vars'
-  action [:enable, :start]
+  action [:create, :enable, :start]
 end
