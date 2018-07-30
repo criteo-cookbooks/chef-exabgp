@@ -35,13 +35,11 @@ action :create do
     cookbook 'exabgp'
     variables(
       name: service_name,
-      platform_family: node['platform_family'],
       pid_file: pid_location,
       user: 'exabgp',
       daemon: install_resource.bin_path,
       config_path: config_resource.config_path,
-      command: "#{install_resource.bin_path} #{config_resource.config_path}",
-      directory: '/etc/exabgp'
+      config_dir: config_resource.config_dir
     )
     action :create
   end
@@ -54,10 +52,12 @@ action :create do
 end
 
 action :enable do
+  update_defaults_file(:enable)
   control_service(:enable)
 end
 
 action :start do
+  update_defaults_file(:enable)
   control_service(:start)
 end
 
@@ -66,6 +66,28 @@ action_class do
 
   def pid_location
     "#{new_resource.run_location}/#{service_name}.pid"
+  end
+
+  def update_defaults_file(service_action)
+    enabled = if service_action == :disable
+                'no'
+              else
+                'yes'
+              end
+
+    template "/etc/default/#{service_name}" do
+      source 'sysvinit.default.erb'
+      owner 'root'
+      group node['root_group']
+      mode '0755'
+      cookbook 'exabgp'
+      variables(
+        daemon_opts: config_resource.config_path,
+        exabgprun: enabled,
+        config_path: config_resource.config_dir
+      )
+      action :create
+    end
   end
 
   def control_service(service_action)

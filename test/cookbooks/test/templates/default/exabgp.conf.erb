@@ -8,6 +8,10 @@ neighbor 127.0.0.1 {
   peer-as 12345;
   hold-time 20;
   family {
+    <% if @platform == 'ubuntu' && @platform_version == '14.04' -%>
+    inet4 unicast;
+    <% else -%>
     ipv4 unicast;
+    <% end -%>
   }
 }

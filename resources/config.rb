@@ -20,7 +20,7 @@
 property :config_name, String, default: 'exabgp'
 property :config_dir, String, default: '/etc/exabgp'
 property :config_path, String
-property :cookbook, String, default: 'exabgp'
+property :cookbook, String
 property :variables, Hash
 
 action :create do

@@ -21,11 +21,15 @@ apt_update 'apt_updater'
 
 exabgp_install 'default'
 
-exabgp_config 'default'
+exabgp_config 'default' do
+  variables(
+    platform: node['platform'],
+    platform_version: node['platform_version']
+  )
+end
 
 exabgp_config 'template-vars' do
   config_name 'custom_description'
-  cookbook 'test'
   variables(description: 'Custom description')
 end
 
@@ -36,5 +40,5 @@ end
 exabgp_service 'custom' do
   install_name 'default'
   config_name 'template-vars'
-  action [:enable, :start]
+  action [:create, :enable, :start]
 end

@@ -1,0 +1,13 @@
+# This file is managed by Chef. Local changes will be overwritten!
+# Additional options that are passed to the Daemon.
+DAEMON_OPTS="<%= @daemon_opts %>"
+
+# Change this to yes when your configuration file is ready.
+# The configuration file is, by default, /etc/exabgp/config.
+# Use the examples stored under /usr/share/doc/exabgp/examples
+# to build your configuration file.
+EXABGPRUN="<%= @exabgprun %>"
+
+# This environement variable will tell the daemon in which folder
+# we store the configuration files.
+export ETC="<%= @config_path %>"
