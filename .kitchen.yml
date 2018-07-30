@@ -19,10 +19,6 @@ suites:
     run_list:
       - recipe[test::pip]
     attributes:
-  - name: source
-    run_list:
-      - recipe[test::source]
-    attributes:
   - name: package
     run_list:
       - recipe[test::package]

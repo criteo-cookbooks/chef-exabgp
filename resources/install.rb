@@ -17,12 +17,9 @@
 # limitations under the License.
 #
 
-property :install_type, Symbol, equal_to: [:package, :pip, :source], default: :package
+property :install_type, Symbol, equal_to: [:package, :pip], default: :package
 property :package_version, String
-property :source_install_path, String, default: '/usr/src/exabgp'
-property :source_url, String, default: 'https://github.com/Exa-Networks/exabgp.git'
-property :source_version, String, default: 'master'
-property :bin_path, String, default: '/usr/src/exabgp/sbin/exabgp'
+property :bin_path, String, default: '/usr/sbin/exabgp'
 
 include ExabgpCookbook::Helpers
 
@@ -59,13 +56,5 @@ action :install do
     end
 
     new_resource.bin_path = '/opt/exabgp/venv/bin/exabgp'
-  when :source
-    package 'git-core'
-
-    git new_resource.source_install_path do
-      repository new_resource.source_url
-      reference new_resource.source_version
-      action :sync
-    end
   end
 end
