@@ -5,7 +5,9 @@ the swiss-army knife of networking.
 
 ## DEPRECATION NOTICE
 
-After careful consideration, we are making this the last release of the ExaBGP cookbook as it is simple to make your own package, service, and template resources via Chef instead of building a complex set of wrappers around this software. Supporting pip and source installations is also a lot more maintenance cost than value for very special use cases. It is due to all of this that we are abandoning this cookbook and leaving it up for adoption if anyone wishes to continue supporting it. Please email support@dnsimple.com if you intend to adopt the cookbook.
+After careful consideration, we are making this the last release of the ExaBGP cookbook as we found implementing implementing simple package, service, and template resources in our internal cookbooks easier and less time consuming than building a complex set of wrappers around ExaBGP's configuration. Supporting pip and source installations is also a lot more maintenance cost than value for very special use cases.
+
+We are leaving this cookbook up for adoption; If anyone wishes to continue supporting it email support@dnsimple.com.
 
 For a basic example of installing and setting up a package based ExaBGP, here is one:
 
