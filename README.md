@@ -3,27 +3,26 @@
 Installs and configures [ExaBGP](https://github.com/Exa-Networks/exabgp)
 the swiss-army knife of networking.
 
-## DEPRECATION NOTICE and Migration to Chef 13.10+
+## DEPRECATION NOTICE
 
-The 3.x series is the last of Chef 12 compatible releases and will now provide
-ample warnings in your logs. The 4.x release will be Chef 13.8+ compatible and
-feature partially re-written and updated install and config resource for better
-maintainability. The 5.x series will remove the exabgp resource along with the
-attributes in this cookbook.
+After careful consideration, we are making this the last release of the ExaBGP cookbook as it is simple to make your own package, service, and template resources via Chef instead of building a complex set of wrappers around this software. Supporting pip and source installations is also a lot more maintenance cost than value for very special use cases. It is due to all of this that we are abandoning this cookbook and leaving it up for adoption if anyone wishes to continue supporting it. Please email support@dnsimple.com if you intend to adopt the cookbook.
 
-To migrate your current resource over to the 4.x series, you'll need to do a few things:
+For a basic example of installing and setting up a package based ExaBGP, here is one:
 
-* Upgrade to Chef 13.10 or higher
-* Rename any instance of `exabgp` to `exabgp_install`
-* Set the `package_version` in your `exabgp_install` resource. Cookbook attributes
-  will be eliminated in the future release
-* Migrate any cookbook attributes you have set to their relevant properties in
-  the new `exabgp_install` or `exabgp_config` resource, this includes:
-    * `package_version`
-    * `source_url`
-    * `source_version`
-* In each of those instances, if you have the `instance` property set, rename
-  it to `instance_name` in the `exabgp_config` resource
+```ruby
+package 'exabgp'
+
+template '/etc/exabgp/exabgp.conf' do
+  user 'exabgp'
+  group 'exabgp'
+  notifies :reload, 'service[exabgp]'
+end
+
+service 'exabgp' do
+  supports reload: true, status: true
+  action :nothing
+end
+```
 
 ## Supported Chef and Platforms
 
