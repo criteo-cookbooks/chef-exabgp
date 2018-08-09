@@ -3,27 +3,96 @@
 Installs and configures [ExaBGP](https://github.com/Exa-Networks/exabgp)
 the swiss-army knife of networking.
 
-## DEPRECATION NOTICE and Migration to Chef 13.10+
+## DEPRECATION NOTICE
 
-The 3.x series is the last of Chef 12 compatible releases and will now provide
-ample warnings in your logs. The 4.x release will be Chef 13.8+ compatible and
-feature partially re-written and updated install and config resource for better
-maintainability. The 5.x series will remove the exabgp resource along with the
-attributes in this cookbook.
+After careful consideration, we are making this the last release of the ExaBGP cookbook as we found implementing implementing simple package, service, and template resources in our internal cookbooks easier and less time consuming than building a complex set of wrappers around ExaBGP's configuration. Supporting pip and source installations is also a lot more maintenance cost than value for very special use cases.
 
-To migrate your current resource over to the 4.x series, you'll need to do a few things:
+We are leaving this cookbook up for adoption; If anyone wishes to continue supporting it email support@dnsimple.com.
 
-* Upgrade to Chef 13.10 or higher
-* Rename any instance of `exabgp` to `exabgp_install`
-* Set the `package_version` in your `exabgp_install` resource. Cookbook attributes
-  will be eliminated in the future release
-* Migrate any cookbook attributes you have set to their relevant properties in
-  the new `exabgp_install` or `exabgp_config` resource, this includes:
-    * `package_version`
-    * `source_url`
-    * `source_version`
-* In each of those instances, if you have the `instance` property set, rename
-  it to `instance_name` in the `exabgp_config` resource
+For a basic example of installing and setting up a package based ExaBGP, here is one:
+
+#### The Chef recipe
+
+```ruby
+package 'exabgp'
+
+template '/etc/exabgp/exabgp.conf' do
+  user 'exabgp'
+  group 'exabgp'
+  variables(my_as: node['mycorp']['as_number'])
+  notifies :reload, 'service[exabgp]'
+end
+
+service 'exabgp' do
+  supports reload: true, status: true
+  action :nothing
+end
+```
+
+#### The exabgp.conf template
+
+```
+process announce-routes {
+	run ./watchdog.sh;
+}
+
+neighbor 127.0.0.1 {
+	router-id 1.2.3.4;
+	local-address 127.0.0.1;
+	local-as <%= @my_as %>;
+	peer-as 1;
+	group-updates false;
+
+	capability {
+		graceful-restart;
+	}
+
+	api {
+		processes [ announce-routes ];
+	}
+}
+```
+
+#### The watchdog.sh script:
+
+```sh
+#!/bin/sh
+
+# ignore Control C
+# if the user ^C exabgp we will get that signal too, ignore it and let exabgp send us a SIGTERM
+trap '' SIGINT
+
+# command and watchdog name are case sensitive
+
+while `true`;
+do
+
+# Let give exabgp the time to setup the BGP session :)
+# But we do not have too, exabgp will record the changes and update the routes once up otherwise
+
+sleep 10
+
+# without name exabgp will use the name of the service as watchdog name
+echo "withdraw watchdog"
+sleep 5
+
+# specify a watchdog name (which may be the same or different each time)
+echo "withdraw watchdog watchdog-one"
+sleep 5
+
+echo "announce watchdog"
+sleep 5
+
+echo "announce watchdog watchdog-one"
+sleep 5
+
+# we have no route with that watchdog but it does not matter, we could have after a configuration reload
+
+echo "announce watchdog watchdog-two"
+echo "withdraw watchdog watchdog-two"
+
+done
+```
 
 ## Supported Chef and Platforms
 
