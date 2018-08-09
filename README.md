@@ -23,6 +23,13 @@ template '/etc/exabgp/exabgp.conf' do
   notifies :reload, 'service[exabgp]'
 end
 
+cookbook_file '/etc/exabgp/watchdog.sh' do
+  user 'exabgp'
+  group 'exabgp'
+  mode '755'
+  notifies :reload, 'service[exabgp]'
+end
+
 service 'exabgp' do
   supports reload: true, status: true
   action :nothing
