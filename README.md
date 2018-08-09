@@ -19,6 +19,7 @@ package 'exabgp'
 template '/etc/exabgp/exabgp.conf' do
   user 'exabgp'
   group 'exabgp'
+  variables(my_as: node['mycorp']['as_number'])
   notifies :reload, 'service[exabgp]'
 end
 
@@ -38,7 +39,7 @@ process announce-routes {
 neighbor 127.0.0.1 {
 	router-id 1.2.3.4;
 	local-address 127.0.0.1;
-	local-as 1;
+	local-as <%= @my_as %>;
 	peer-as 1;
 	group-updates false;
 
