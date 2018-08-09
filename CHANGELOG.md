@@ -1,5 +1,13 @@
 # Change Log
 
+## [v3.2.1](https://github.com/dnsimple/chef-exabgp/tree/v3.2.1) (2018-08-09)
+[Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/v3.2.0...v3.2.1)
+
+**Merged pull requests:**
+
+- Deprecate the cookbook [\#24](https://github.com/dnsimple/chef-exabgp/pull/24) ([martinisoft](https://github.com/martinisoft))
+- Update Copyright [\#23](https://github.com/dnsimple/chef-exabgp/pull/23) ([onlyhavecans](https://github.com/onlyhavecans))
+
 ## [v3.2.0](https://github.com/dnsimple/chef-exabgp/tree/v3.2.0) (2018-07-18)
 [Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/v3.1.1...v3.2.0)
 
