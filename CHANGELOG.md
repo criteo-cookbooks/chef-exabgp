@@ -1,5 +1,15 @@
 # Change Log
 
+## [v3.2.3](https://github.com/dnsimple/chef-exabgp/tree/v3.2.3) (2018-09-12)
+[Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/v3.2.2...v3.2.3)
+
+**Merged pull requests:**
+
+- Do not update exabgp resource every chef run [\#25](https://github.com/dnsimple/chef-exabgp/pull/25) ([Annih](https://github.com/Annih))
+
+## [v3.2.2](https://github.com/dnsimple/chef-exabgp/tree/v3.2.2) (2018-08-09)
+[Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/v3.2.1...v3.2.2)
+
 ## [v3.2.1](https://github.com/dnsimple/chef-exabgp/tree/v3.2.1) (2018-08-09)
 [Full Changelog](https://github.com/dnsimple/chef-exabgp/compare/v3.2.0...v3.2.1)
 
